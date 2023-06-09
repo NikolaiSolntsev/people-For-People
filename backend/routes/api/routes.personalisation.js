@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
 
 router.route('/registration').post(async (req, res) => {
+  console.log('122333');
   try {
     const { name, phone, password, email, language } = req.body;
 
@@ -28,11 +29,12 @@ router.route('/registration').post(async (req, res) => {
     req.session.user = {
       id: newUser.id,
       name: newUser.name,
-      password: newUser.phone,
+      phone: newUser.phone,
     };
 
     res.json({ user: req.session.user, message: 'ok' });
   } catch (err) {
+    console.log(err);
     res.json({ message: err.message });
   }
 });
@@ -44,7 +46,7 @@ router.route('/log').put(async (req, res) => {
       res.json({ message: 'length' });
       return;
     }
-    const user = await User.findOne({ where: { email }, raw: true });
+    const user = await User.findOne({ where: { phone }, raw: true });
     if (user) {
       const ok = await bcrypt.compare(password, user.password);
       if (ok) {
@@ -61,9 +63,15 @@ router.route('/log').put(async (req, res) => {
   }
 });
 
-router.route('/logout').get((req, res) => {
-  res.clearCookie('user_sid');
-  res.json({ message: 'ok' });
+router.route('/logout').get(async (req, res) => {
+  
+  await req.session.destroy()
+    if (!req.session) {
+      res.clearCookie('user_sid');
+    res.json({ message: 'ok' })
+    } else { return res.status(500).json({ message: 'Ошибка при удалении сессии' });
+   }
+  
 });
 
 module.exports = router;
