@@ -1,0 +1,18 @@
+.navbar{ width: 100%;
+    background-color: rgb(249, 115, 115);
+    box-shadow: 2px 30px 60px 6px rgb(219, 26, 5);
+    height: 50px;
+display: flex;
+justify-content:space-around;
+align-items: center;
+}
+.links{
+    
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+a{
+    text-decoration: none;
+}
