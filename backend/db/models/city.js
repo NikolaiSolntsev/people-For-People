@@ -3,8 +3,8 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class City extends Model {
     static associate({ Country, MyService }) {
-      this.belongsTo(Country, { foreignKey: 'country_id' });
       this.hasMany(MyService, { foreignKey: 'city_id' });
+      this.belongsTo(Country, { foreignKey: 'country_id' });
     }
   }
   City.init(
