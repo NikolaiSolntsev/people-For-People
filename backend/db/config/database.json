@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "leha",
-    "password": "123456",
-    "database": "people",
+    "username": "postgres",
+    "password": "qwerty",
+    "database": "PeopleOfPeople",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   }
 }
