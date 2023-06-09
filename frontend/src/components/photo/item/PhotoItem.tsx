@@ -4,4 +4,4 @@ function PhotoItem() {
   return <div></div>;
 }
 
-export default Photo;
+export default PhotoItem;
