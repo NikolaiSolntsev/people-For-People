@@ -8,6 +8,7 @@ import { RootState, useAppDispatch } from '../../../store';
 import { userRegistration } from '../authSlice/authSlice';
 
 function RegForm(): JSX.Element {
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -89,6 +90,7 @@ function RegForm(): JSX.Element {
       <h2>{error}</h2>
     </div>
   );
+
 }
 
 export default RegForm;
