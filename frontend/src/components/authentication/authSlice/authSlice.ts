@@ -2,17 +2,20 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import User from '../../user/type/User';
 import UserState from '../../user/type/UserState';
 import * as api from '../api';
+
 // import registrationFetch from '../api';
 
 // начальный state
-const initialState: UserState = { user: {}, error: '' };
+const initialState: UserState = { user: undefined, error: '' };
 
 export const userRegistration = createAsyncThunk(
   'user/registration',
   (obj: User) => api.registrationFetch(obj)
 );
-
-const userSlice = createSlice({
+export const userLogout = createAsyncThunk('user/logout', () =>
+  api.logoutFetch()
+);
+const authSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
@@ -24,8 +27,15 @@ const userSlice = createSlice({
       })
       .addCase(userRegistration.rejected, (state, action) => {
         state.error = action.error.message;
+      })
+      .addCase(userLogout.fulfilled, (state) => {
+        state.user = {};
+        state.error = '';
+      })
+      .addCase(userLogout.rejected, (state, action) => {
+        state.error = action.error.message;
       });
   },
 });
 // export const {} = userSlice.actions;
-export default userSlice.reducer;
+export default authSlice.reducer;

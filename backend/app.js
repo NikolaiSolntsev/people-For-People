@@ -3,7 +3,7 @@ const express = require('express');
 const serverConfig = require('./config/serverConfig/serverConfig');
 
 
- const apiRouterPersonalisation = require('./routes/api/routes.personalisation');
+ const apiAuthRoute = require('./routes/api/routes.personalisation');
 
 
 
@@ -15,7 +15,7 @@ const PORT = process.env.PORT ?? 4000;
 serverConfig(app);
 
 
-app.use('/api', apiRouterPersonalisation);
+app.use('/api/auth', apiAuthRoute);
 
 
 
