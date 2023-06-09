@@ -1,7 +1,7 @@
 import React from 'react';
 
-function RegForm() {
-  return <div></div>;
+function RegForm(): JSX.Element {
+  return <div>rega</div>;
 }
 
 export default RegForm;
