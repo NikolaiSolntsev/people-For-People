@@ -18,6 +18,6 @@ const userSlice = createSlice({
   },
 });
 
-// export const {} = userSlice.actions;
+// export const {getTodos, removeTodo} = userSlice.actions;
 
 export default userSlice.reducer;

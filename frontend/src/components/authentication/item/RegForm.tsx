@@ -4,11 +4,11 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootState, useAppDispatch } from '../../../store';
 import { userRegistration } from '../authSlice/authSlice';
 
 function RegForm(): JSX.Element {
-
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -17,8 +17,9 @@ function RegForm(): JSX.Element {
   const [language, setLanguage] = useState('');
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const { error } = useSelector((store: RootState) => store.user);
+  const { error, user } = useSelector((store: RootState) => store.auth);
 
   const registration: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -35,6 +36,9 @@ function RegForm(): JSX.Element {
       );
     }
   };
+  if (user) {
+    navigate('/');
+  }
 
   return (
     <div className="reg-form">
@@ -90,7 +94,6 @@ function RegForm(): JSX.Element {
       <h2>{error}</h2>
     </div>
   );
-
 }
 
 export default RegForm;
