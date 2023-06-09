@@ -1,6 +1,5 @@
 'use strict';
 const { Model } = require('sequelize');
-const myservice = require('./myservice');
 module.exports = (sequelize, DataTypes) => {
   class City extends Model {
     static associate({ Country, MyService }) {
