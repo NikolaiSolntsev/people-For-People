@@ -5,7 +5,7 @@ import { MyServicesState } from '../type/MyServicesState';
 const initialState: MyServicesState = { myServices: [] };
 
 const servicesSlice = createSlice({
-  name: 'services',
+  name: 'myServices',
   initialState,
   reducers: {},
 });
