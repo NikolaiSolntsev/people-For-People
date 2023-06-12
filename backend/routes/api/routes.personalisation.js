@@ -112,4 +112,41 @@ router.get('/logout', async (req, res) => {
   }
 });
 
+router.route('/change').post(async (req, res) => {
+
+  try {
+    const { name, password, email, language } = req.body;
+
+    if (!name || !phone || !password || !email || !language) {
+      res.status(400).json({ message: 'Заполните все поля' });
+      return;
+    }
+
+    const user = await User.findOne({ where: { phone } });
+
+    if (user) {
+      res.json({
+        message: 'Такой пользователь уже существует.',
+        user: undefined,
+      });
+      return;
+    }
+
+    const hash = await bcrypt.hash(password, 10);
+
+    const newUser = await User.create({ name, phone, password: hash, email });
+
+    req.session.user = {
+      id: newUser.id,
+      name: newUser.name,
+      phone: newUser.phone,
+    };
+
+    res.json({ user: req.session.user, message: 'ok' });
+  } catch (err) {
+    console.log(err);
+    res.json({ message: err.message });
+  }
+});
+
 module.exports = router;

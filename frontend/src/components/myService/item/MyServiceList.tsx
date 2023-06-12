@@ -1,7 +1,7 @@
 import React from 'react';
 
-function MyServiceList() {
-  return <div></div>;
+function MyServiceList():JSX.Element {
+  return <div>мои услуги</div>;
 }
 
 export default MyServiceList;
