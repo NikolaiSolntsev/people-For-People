@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import  User  from '../../user/type/User';
+import User from '../../user/type/User';
 import UserState from '../../user/type/UserState';
 import * as api from '../api';
 import Credentials from '../type/Credentials';
@@ -14,9 +14,8 @@ export const userRegistration = createAsyncThunk(
   (obj: User) => api.registrationFetch(obj)
 );
 
-export const changeUser = createAsyncThunk(
-  'user/change',
-  (obj:User) => api.changeUserFetch(obj)
+export const changeUser = createAsyncThunk('user/change', (obj: User) =>
+  api.changeUserFetch(obj)
 );
 
 export const userLogin = createAsyncThunk(
@@ -25,7 +24,6 @@ export const userLogin = createAsyncThunk(
 );
 export const userLogout = createAsyncThunk('user/logout', () =>
   api.logoutFetch()
-
 );
 const authSlice = createSlice({
   name: 'user',
@@ -52,13 +50,14 @@ const authSlice = createSlice({
         state.error = '';
       })
       .addCase(changeUser.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
 
       .addCase(userLogin.fulfilled, (state, action) => {
         state.user = action.payload;
         state.error = '';
       })
       .addCase(userLogin.rejected, (state, action) => {
-
         state.error = action.error.message;
       })
       .addCase(userLogout.fulfilled, (state) => {

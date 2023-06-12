@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { RootState, useAppDispatch } from '../../../../store';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { InputLabel, MenuItem, Select } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../../../store';
 import { changeUser } from '../../authSlice/authSlice';
 
 function Profile(): JSX.Element {
@@ -15,35 +15,40 @@ function Profile(): JSX.Element {
   const { user } = useSelector((store: RootState) => store.auth);
   const dispatch = useAppDispatch();
 
-
-  const saveChange:React.FormEventHandler<HTMLFormElement> =(e)=>{
-e.preventDefault();
-dispatch(changeUser({name:name, newPassword:newPassword, password:oldPassword, language: language, email: email}))
-  }
-
- 
+  const saveChange: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    dispatch(
+      changeUser({
+        name,
+        newPassword,
+        password: oldPassword,
+        language,
+        email,
+      })
+    );
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <h4>мои услуги</h4>
-      <div className="profile">
+      <div className='profile'>
         <div>
-          <button type="button">
-            <Link to="/myServices">мои услуги</Link>
+          <button type='button'>
+            <Link to='/myServices'>мои услуги</Link>
           </button>
         </div>
         <div>
-          <button type="button">
-            <Link to="/history">история заказов и услуг</Link>
+          <button type='button'>
+            <Link to='/history'>история заказов и услуг</Link>
           </button>
         </div>
       </div>
 
       <form onSubmit={saveChange}>
         <div>
-          <img src={user?.photo} alt="image" />
+          <img src={user?.photo} alt='img' />
         </div>
-<div> your phone:  {user?.phone}</div>
+        <div> your phone: {user?.phone}</div>
         <br />
         <br />
         <label>
@@ -53,7 +58,8 @@ dispatch(changeUser({name:name, newPassword:newPassword, password:oldPassword, l
             onChange={(e) => setName(e.target.value)}
             value={user?.name}
           />
-        </label><br/>
+        </label>
+        <br />
         <label>
           email
           <input
@@ -62,29 +68,33 @@ dispatch(changeUser({name:name, newPassword:newPassword, password:oldPassword, l
             value={user?.email}
           />
         </label>
-        <InputLabel id="demo-simple-select-required-label">
+        <InputLabel id='demo-simple-select-required-label'>
           изменить язык
         </InputLabel>
         <Select
-          labelId="demo-simple-select-required-label"
-          id="demo-simple-select-required"
+          labelId='demo-simple-select-required-label'
+          id='demo-simple-select-required'
           value={language}
-          label="Выберите язык *"
-          onChange={(e) => setLanguage(e.target.value)}
-        >
-          <MenuItem value="">
+          label='Выберите язык *'
+          onChange={(e) => setLanguage(e.target.value)}>
+          <MenuItem value=''>
             <em>None</em>
           </MenuItem>
-          <MenuItem value="русский">русский</MenuItem>
-          <MenuItem value="english">english</MenuItem>
-        </Select><br/>
+          <MenuItem value='русский'>русский</MenuItem>
+          <MenuItem value='english'>english</MenuItem>
+        </Select>
+        <br />
         <label>
           edit password
-          <input placeholder="old password" onChange={(e) => setOldPassword(e.target.value)}
-            />
+          <input
+            placeholder='old password'
+            onChange={(e) => setOldPassword(e.target.value)}
+          />
           <br />
-          <input placeholder="new password" onChange={(e) => setNewPassword(e.target.value)}
-            />
+          <input
+            placeholder='new password'
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
         </label>
         <button type='submit'>save</button>
       </form>
