@@ -1,86 +1,49 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import User from '../../user/type/User';
-import UserState from '../AuthState';
+import User from '../../user/type/User';
+import UserState from '../../user/type/UserState';
 import * as api from '../api';
-import RegistrationData from '../RegistrationData';
-import Credentials from '../Credentials';
+
+// import registrationFetch from '../api';
 
 // начальный state
-const initialState: UserState = {
-  user: undefined,
-  authChecked: false,
-  loginFormError: undefined,
-  registerFormError: undefined,
-};
+const initialState: UserState = { user: undefined, error: '' };
 
-export const getUser = createAsyncThunk('auth/user', () => api.user());
-
-export const userCheck = createAsyncThunk(
-  'user/check',
-  () => api.checkUser()
-);
+export const userCheck = createAsyncThunk('user/check', () => api.checkUser());
 
 export const userRegistration = createAsyncThunk(
-  'auth/registration',
-  (data: RegistrationData) => api.registrationFetch(data)
+  'user/registration',
+  (obj: User) => api.registrationFetch(obj)
 );
-export const userLogin = createAsyncThunk(
-  'auth/login',
-  (credentials: Credentials) => api.loginFetch(credentials)
-);
-
-
-export const userLogout = createAsyncThunk('auth/logout', () =>
+export const userLogout = createAsyncThunk('user/logout', () =>
   api.logoutFetch()
-
 );
 const authSlice = createSlice({
-  name: 'auth',
+  name: 'user',
   initialState,
-  reducers: {
-    resetLoginFormError: (state) => {
-      state.loginFormError = undefined;
-    },
-    resetRegisterFormError: (state) => {
-      state.registerFormError = undefined;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-
-      .addCase(getUser.fulfilled, (state, action) => {
-        state.authChecked = true;
-        state.user = action.payload.isLoggedIn
-          ? action.payload.user
-          : undefined;
+      .addCase(userCheck.fulfilled, (state, action) => {
+        state.user = action.payload;
       })
-
-    .addCase(userCheck.fulfilled, (state, action) => {
-      state.user = action.payload;
-    })
-    .addCase(userCheck.rejected, (state, action) => {
-      state.error = action.error.message;
-    })
-
+      .addCase(userCheck.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
       .addCase(userRegistration.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.registerFormError = undefined;
+        state.error = '';
       })
       .addCase(userRegistration.rejected, (state, action) => {
-        state.registerFormError = action.error.message;
-      })
-      .addCase(userLogin.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.loginFormError = undefined;
-      })
-      .addCase(userLogin.rejected, (state, action) => {
-        state.loginFormError = action.error.message;
+        state.error = action.error.message;
       })
       .addCase(userLogout.fulfilled, (state) => {
         state.user = undefined;
+        state.error = '';
+      })
+      .addCase(userLogout.rejected, (state, action) => {
+        state.error = action.error.message;
       });
   },
 });
-export const { resetLoginFormError, resetRegisterFormError } =
-  authSlice.actions;
+// export const {} = userSlice.actions;
 export default authSlice.reducer;

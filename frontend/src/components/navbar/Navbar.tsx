@@ -1,32 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
-import { getUser, userLogout } from '../authentication/authSlice/authSlice';
+import { userLogout } from '../authentication/authSlice/authSlice';
 
 function Navbar(): JSX.Element {
   const { user } = useSelector((store: RootState) => store.auth);
-
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
-
   const logout = (): void => {
     dispatch(userLogout());
   };
 
-  // console.log(user?.language, 'rrrrrrrrrrrrrrrr');
-  console.log(user?.name);
   return (
     <div className="navbar">
       <div>красивое название </div>
       <div className="links">
         {user?.id ? (
           <>
-            <div> {user && `Привет ${user.name}!`}</div>
+          <div> {user && `Привет ${user.name}!`}</div>
             <div>
               <Link to="/">Hа главную</Link>
             </div>
@@ -48,10 +40,10 @@ function Navbar(): JSX.Element {
         ) : (
           <>
             <div>
-              <Link to="/auth/login">Войти</Link>
+              <Link to="/login">Войти</Link>
             </div>
             <div>
-              <Link to="/auth/registration">Зарегистрироваться</Link>
+              <Link to="/registration">Зарегистрироваться</Link>
             </div>
           </>
         )}
