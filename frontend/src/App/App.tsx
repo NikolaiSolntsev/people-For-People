@@ -22,21 +22,21 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <div className="App">
-      <div className="App">
+    <div className='App'>
+      <div className='App'>
         <MyServiceItem />
       </div>
 
       <Navbar />
       <Routes>
-        <Route path="/registration" element={<RegForm />} />
-        <Route path="/login" element={<LogForm />} />
-        <Route path="/servicesForMee" element={<ServicesForMeeList />} />
+        <Route path='/registration' element={<RegForm />} />
+        <Route path='/login' element={<LogForm />} />
+        <Route path='/servicesForMee' element={<ServicesForMeeList />} />
         <Route
-          path="/servicesForMee/:service_id"
+          path='/servicesForMee/:service_id'
           element={<AboutServiceForMee />}
         />
-        <Route path="/account/:user_id" element={<Account />} />
+        <Route path='/account/:user_id' element={<Account />} />
       </Routes>
     </div>
   );
