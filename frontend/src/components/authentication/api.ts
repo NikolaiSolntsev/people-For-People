@@ -55,7 +55,7 @@ export const  checkUser = async (): Promise<User> => {
 
 export const changeUserFetch = async (obj: User): Promise<User> => {
   const response = await fetch('/api/auth/change', {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-type': 'application/json',
     },
@@ -65,6 +65,6 @@ export const changeUserFetch = async (obj: User): Promise<User> => {
     const { message } = await response.json();
     throw message;
   }
-  const { user } = await response.json();
-  return user;
+  const { newUser } = await response.json();
+  return newUser;
 };

@@ -9,8 +9,8 @@ function Profile(): JSX.Element {
   const [language, setLanguage] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
+  const [photo, setPhoto] = useState('');
+  
 
   const { user } = useSelector((store: RootState) => store.auth);
   const dispatch = useAppDispatch();
@@ -19,11 +19,12 @@ function Profile(): JSX.Element {
     e.preventDefault();
     dispatch(
       changeUser({
+        id:user?.id,
+        phone: user?.phone,
         name,
-        newPassword,
-        password: oldPassword,
         language,
         email,
+        photo,
       })
     );
   };
@@ -48,6 +49,7 @@ function Profile(): JSX.Element {
         <div>
           <img src={user?.photo} alt='img' />
         </div>
+        <div>твои баллы:  {user?.score}</div>
         <div> your phone: {user?.phone}</div>
         <br />
         <br />
@@ -56,7 +58,16 @@ function Profile(): JSX.Element {
           <input
             placeholder={user?.name}
             onChange={(e) => setName(e.target.value)}
-            value={user?.name}
+            defaultValue={user?.name}
+          />
+        </label>
+        <br />
+        <label>
+          photo
+          <input
+            placeholder={user?.photo}
+            onChange={(e) => setPhoto(e.target.value)}
+            defaultValue={user?.photo}
           />
         </label>
         <br />
@@ -65,7 +76,7 @@ function Profile(): JSX.Element {
           <input
             placeholder={user?.email}
             onChange={(e) => setEmail(e.target.value)}
-            value={user?.email}
+            defaultValue={user?.email}
           />
         </label>
         <InputLabel id='demo-simple-select-required-label'>
@@ -84,18 +95,7 @@ function Profile(): JSX.Element {
           <MenuItem value='english'>english</MenuItem>
         </Select>
         <br />
-        <label>
-          edit password
-          <input
-            placeholder='old password'
-            onChange={(e) => setOldPassword(e.target.value)}
-          />
-          <br />
-          <input
-            placeholder='new password'
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </label>
+       
         <button type='submit'>save</button>
       </form>
     </div>
