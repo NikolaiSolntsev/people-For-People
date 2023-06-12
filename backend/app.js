@@ -10,6 +10,7 @@ const apiCountriesRouter = require('./routes/api/routes.countries');
 
 
  const apiAuthRoute = require('./routes/api/routes.personalisation');
+ const servicesForMee = require('./routes/api/routes.servicesForMee');
 
 
 
@@ -25,7 +26,7 @@ app.use('/api/countries', apiCountriesRouter);
 
 
 app.use('/api/auth', apiAuthRoute);
-
+app.use('/api/servicesForMee', servicesForMee)
 
 
 
