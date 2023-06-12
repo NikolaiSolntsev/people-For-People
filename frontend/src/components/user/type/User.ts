@@ -11,5 +11,4 @@ type User = {
   error?: boolean;
 };
 
-
 export default User;

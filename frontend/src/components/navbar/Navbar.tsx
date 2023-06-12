@@ -18,7 +18,7 @@ function Navbar(): JSX.Element {
       <div className="links">
         {user?.id ? (
           <>
-          <div> {user && `Привет ${user.name}!`}</div>
+            <div> {user && `Привет ${user.name}!`}</div>
             <div>
               <Link to="/">Hа главную</Link>
             </div>
@@ -27,6 +27,9 @@ function Navbar(): JSX.Element {
             </div>
             <div>
               <Link to="/servicesForMee">услуги для меня</Link>
+            </div>
+            <div>
+              <Link to={`/account/${user.id}`}>личный кабинет</Link>
             </div>
             <div>
               <button type="button" onClick={logout}>

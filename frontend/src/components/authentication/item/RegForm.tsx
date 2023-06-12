@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { useSelector } from 'react-redux';
@@ -56,13 +56,13 @@ function RegForm(): JSX.Element {
           onChange={(e) => setPhone(e.target.value)}
         />
         <input
-          type="text"
+          type="password"
           name="password"
           placeholder="Введите пароль"
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
-          type="text"
+          type="password"
           name="repeatPassword"
           placeholder="Введите еще раз"
           onChange={(e) => setRepeatPassword(e.target.value)}
@@ -84,7 +84,7 @@ function RegForm(): JSX.Element {
           onChange={(e) => setLanguage(e.target.value)}
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>Выберите язык</em>
           </MenuItem>
           <MenuItem value="русский">русский</MenuItem>
           <MenuItem value="english">english</MenuItem>
