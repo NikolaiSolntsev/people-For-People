@@ -36,7 +36,7 @@ export async function loginFetch(credentials: Credentials): Promise<User> {
 
 export const logoutFetch = async (): Promise<void> => {
   const response = await fetch('/api/auth/logout');
-  const res = await response.json();
+
 
   if (!response.ok) {
     const { message } = await response.json();
