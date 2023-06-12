@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createSlice } from '@reduxjs/toolkit';
-import { UserState } from '../type/UserState';
+import UserState from '../type/UserState';
 
-const initialState: UserState = { user: undefined };
+const initialState: UserState = { user: undefined, error: '' };
 
 const userSlice = createSlice({
   name: 'user',
@@ -18,6 +18,6 @@ const userSlice = createSlice({
   },
 });
 
-export const {} = userSlice.actions;
+// export const {getTodos, removeTodo} = userSlice.actions;
 
 export default userSlice.reducer;

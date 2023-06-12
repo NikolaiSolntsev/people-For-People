@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Main() {
+
   return (
     <div>
       <div className="video-div">
@@ -10,6 +11,7 @@ function Main() {
       </div>
     </div>
   );
+
 }
 
 export default Main;
