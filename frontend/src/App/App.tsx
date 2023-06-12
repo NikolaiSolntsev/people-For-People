@@ -15,6 +15,7 @@ import './App.css';
 import Navbar from '../components/navbar/Navbar';
 import RegForm from '../components/authentication/item/RegForm';
 import LogForm from '../components/authentication/item/LogForm';
+
 import { userCheck } from '../components/authentication/authSlice/authSlice';
 import { RootState, useAppDispatch } from '../store';
 import { getAllServices } from '../components/servicesFoMee/servicesSlice/servicesSlice';
@@ -49,7 +50,9 @@ dispatch(getAllServices())
         <Route path="/login" element={<LogForm />} />
         <Route path='/servicesForMee' element={<ServicesForMeeList/>}/>
         <Route path='/servicesForMee/:service_id' element={<AboutServiceForMee/>}/>
+
         <Route path='/account/:user_id' element={<Account/>}/>
+
       </Routes>
 
     </div>
