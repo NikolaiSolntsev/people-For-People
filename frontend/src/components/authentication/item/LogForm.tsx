@@ -1,7 +1,9 @@
 import React from 'react';
 
-function logForm() {
-  return <div></div>;
+
+function LogForm(): JSX.Element {
+  return <div>loga</div>;
+
 }
 
-export default logForm;
+export default LogForm;
