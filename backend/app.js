@@ -4,6 +4,7 @@ const serverConfig = require('./config/serverConfig/serverConfig');
 
 
  const apiAuthRoute = require('./routes/api/routes.personalisation');
+ const servicesForMee = require('./routes/api/routes.servicesForMee');
 
 
 
@@ -16,7 +17,7 @@ serverConfig(app);
 
 
 app.use('/api/auth', apiAuthRoute);
-
+app.use('/api/servicesForMee', servicesForMee)
 
 
 
