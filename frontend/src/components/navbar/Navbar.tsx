@@ -29,6 +29,9 @@ function Navbar(): JSX.Element {
               <Link to="/servicesForMee">услуги для меня</Link>
             </div>
             <div>
+              <Link to={`/account/${user.id}`}>личный кабинет</Link>
+            </div>
+            <div>
               <button type="button" onClick={logout}>
                 <Link to="/">Выйти</Link>
               </button>
