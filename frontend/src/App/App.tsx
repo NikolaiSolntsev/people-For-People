@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
+
 import { Routes, Route } from 'react-router-dom';
+
+
+
 import MyServiceItem from '../components/myService/item/MyServiceItem';
 
 import './App.css';
@@ -9,6 +13,7 @@ import LogForm from '../components/authentication/item/LogForm';
 import { userCheck } from '../components/authentication/authSlice/authSlice';
 import { useAppDispatch } from '../store';
 import { getAllServices } from '../components/servicesFoMee/servicesSlice/servicesSlice';
+
 import ServicesForMeeList from '../components/servicesFoMee/items/ServicesForMeeList';
 import AboutServiceForMee from '../components/servicesFoMee/items/AboutServiceForMee';
 import Account from '../components/account/items/Account';
@@ -22,13 +27,16 @@ function App(): JSX.Element {
   }, []);
 
   return (
+
     <div className='App'>
       <div className='App'>
+
         <MyServiceItem />
       </div>
 
       <Navbar />
       <Routes>
+
         <Route path='/registration' element={<RegForm />} />
         <Route path='/login' element={<LogForm />} />
         <Route path='/servicesForMee' element={<ServicesForMeeList />} />
@@ -37,6 +45,7 @@ function App(): JSX.Element {
           element={<AboutServiceForMee />}
         />
         <Route path='/account/:user_id' element={<Account />} />
+
       </Routes>
     </div>
   );

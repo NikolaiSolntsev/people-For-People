@@ -9,5 +9,5 @@ type User = {
   photo?: string;
   error?: boolean;
 };
-console.log('ok')
+console.log('ok');
 export default User;
