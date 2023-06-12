@@ -8,12 +8,17 @@ import * as api from '../api';
 // начальный state
 const initialState: UserState = { user: undefined, error: '' };
 
+export const userCheck = createAsyncThunk(
+  'user/check',
+  () => api.checkUser()
+);
+
 export const userRegistration = createAsyncThunk(
   'user/registration',
   (obj: User) => api.registrationFetch(obj)
 );
-export const userLogout = createAsyncThunk('user/logout', () =>
-  api.logoutFetch()
+export const userLogout = createAsyncThunk(
+  'user/logout', () => api.logoutFetch()
 );
 const authSlice = createSlice({
   name: 'user',
@@ -21,6 +26,12 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    .addCase(userCheck.fulfilled, (state, action) => {
+      state.user = action.payload;
+    })
+    .addCase(userCheck.rejected, (state, action) => {
+      state.error = action.error.message;
+    })
       .addCase(userRegistration.fulfilled, (state, action) => {
         state.user = action.payload;
         state.error = '';
