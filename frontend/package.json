@@ -37,7 +37,8 @@
       "react-app",
       "react-app/jest",
       "airbnb",
-      "airbnb-typescript"
+      "airbnb-typescript",
+      "prettier"
     ],
     "rules": {
       "jsx-a11y/interactive-supports-focus": 0,
@@ -99,6 +100,7 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",

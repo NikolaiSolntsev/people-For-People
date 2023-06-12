@@ -3,8 +3,6 @@ import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 
-
-import Main from '../components/main/item/Main';
 import MyServiceItem from '../components/myService/item/MyServiceItem';
 
 
@@ -35,15 +33,14 @@ function App(): JSX.Element {
   }, []);
 
   return (
-
     <div className='App'>
       <div className='App'>
-
         <MyServiceItem />
       </div>
 
       <Navbar />
       <Routes>
+
 
      
       
@@ -60,7 +57,6 @@ function App(): JSX.Element {
           element={<AboutServiceForMee />}
         />
         <Route path='/account/:user_id' element={<Account />} />
-
       </Routes>
     </div>
   );
