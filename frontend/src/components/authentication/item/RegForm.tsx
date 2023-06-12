@@ -56,13 +56,13 @@ function RegForm(): JSX.Element {
           onChange={(e) => setPhone(e.target.value)}
         />
         <input
-          type="text"
+          type="password"
           name="password"
           placeholder="Введите пароль"
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
-          type="text"
+          type="password"
           name="repeatPassword"
           placeholder="Введите еще раз"
           onChange={(e) => setRepeatPassword(e.target.value)}
@@ -81,9 +81,10 @@ function RegForm(): JSX.Element {
           id="demo-simple-select-required"
           value={language}
           label="Выберите язык *"
-          onChange={(e) => setLanguage(e.target.value)}>
+          onChange={(e) => setLanguage(e.target.value)}
+        >
           <MenuItem value="">
-            <em>None</em>
+            <em>Выберите язык</em>
           </MenuItem>
           <MenuItem value="русский">русский</MenuItem>
           <MenuItem value="english">english</MenuItem>
