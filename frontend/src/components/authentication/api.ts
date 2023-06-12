@@ -40,11 +40,21 @@ export async function loginFetch(credentials: Credentials): Promise<User> {
 }
 
 export const logoutFetch = async (): Promise<void> => {
-  const response = await fetch('/api/auth/logout', { method: 'POST' });
-  // const res = await response.json();
+
+  const response = await fetch('/api/auth/logout');
+  const res = await response.json();
+ 
 
   if (!response.ok) {
     const { message } = await response.json();
     throw message;
   }
 };
+
+
+export const  checkUser = async (): Promise<User> => {
+ const response = await fetch('/api/auth/check')
+ const data = await response.json();
+ const {user} = data;
+ return user;
+}

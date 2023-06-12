@@ -15,6 +15,11 @@ const initialState: UserState = {
 
 export const getUser = createAsyncThunk('auth/user', () => api.user());
 
+export const userCheck = createAsyncThunk(
+  'user/check',
+  () => api.checkUser()
+);
+
 export const userRegistration = createAsyncThunk(
   'auth/registration',
   (data: RegistrationData) => api.registrationFetch(data)
@@ -24,8 +29,10 @@ export const userLogin = createAsyncThunk(
   (credentials: Credentials) => api.loginFetch(credentials)
 );
 
+
 export const userLogout = createAsyncThunk('auth/logout', () =>
   api.logoutFetch()
+
 );
 const authSlice = createSlice({
   name: 'auth',
@@ -40,12 +47,21 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
       .addCase(getUser.fulfilled, (state, action) => {
         state.authChecked = true;
         state.user = action.payload.isLoggedIn
           ? action.payload.user
           : undefined;
       })
+
+    .addCase(userCheck.fulfilled, (state, action) => {
+      state.user = action.payload;
+    })
+    .addCase(userCheck.rejected, (state, action) => {
+      state.error = action.error.message;
+    })
+
       .addCase(userRegistration.fulfilled, (state, action) => {
         state.user = action.payload;
         state.registerFormError = undefined;

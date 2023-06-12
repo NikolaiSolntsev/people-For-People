@@ -34,6 +34,9 @@ function Navbar(): JSX.Element {
               <Link to="/">Мои услуги</Link>
             </div>
             <div>
+              <Link to="/servicesForMee">услуги для меня</Link>
+            </div>
+            <div>
               <button type="button" onClick={logout}>
                 <Link to="/">Выйти</Link>
               </button>

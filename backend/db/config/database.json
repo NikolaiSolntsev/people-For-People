@@ -1,10 +1,15 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "qwerty",
-    "database": "PeopleOfPeople",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "logging": false
+
+    "use_env_variable": "DATABASE_URL"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialectOptions": {
+      "ssl": {
+        "rejectUnauthorized": false
+      }
+    }
+
   }
 }
