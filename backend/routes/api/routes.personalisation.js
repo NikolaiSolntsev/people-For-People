@@ -2,26 +2,26 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
 
-router.get('/user', async (req, res) => {
-  console.log(res.locals);
-  const { user } = res.locals;
-  // console.log('ssssssssssss', user);
-  if (user) {
-    res.status(201).json(
-      {
-        isLoggedIn: true,
-        user: {
-          id: user.id,
-          name: user.name,
-          phone: user.phone,
-        },
-      },
-      console.log(user, 'aaaaaaaaaaa')
-    );
-  } else {
-    res.status(500).json({ isLoggedIn: false });
-  }
-});
+// router.get('/user', async (req, res) => {
+//   console.log(res.locals);
+//   const { user } = res.locals;
+//   // console.log('ssssssssssss', user);
+//   if (user) {
+//     res.status(201).json(
+//       {
+//         isLoggedIn: true,
+//         user: {
+//           id: user.id,
+//           name: user.name,
+//           phone: user.phone,
+//         },
+//       },
+//       console.log(user, 'aaaaaaaaaaa')
+//     );
+//   } else {
+//     res.status(500).json({ isLoggedIn: false });
+//   }
+// });
 
 router.route('/check').get((req, res) => {
   const { user } = req.session;
@@ -29,7 +29,7 @@ router.route('/check').get((req, res) => {
 });
 
 router.route('/registration').post(async (req, res) => {
-  console.log('122333');
+  // console.log('122333');
 
   try {
     const { name, phone, password, email, language } = req.body;
@@ -73,19 +73,21 @@ router.route('/registration').post(async (req, res) => {
   }
 });
 router.post('/login', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
-    const { phone, password } = req.body;
+    const { name, phone, password } = req.body;
 
-    if (!phone || !password) {
+    if (!name || !phone || !password) {
       res.status(400).json({ message: 'Заполните все поля' });
       return;
     }
 
     const user = await User.findOne({ where: { phone }, raw: true });
+    console.log(user);
     if (user && (await bcrypt.compare(password, user.password))) {
-      req.session.user = { id: user.id, name: user.name };
-      res.status(200).json({ message: 'ok', user: req.session.user });
+      req.session.user = { id: user.id, name: user.name, phone: user.phone };
+
+      res.status(200).json({ user: req.session.user, message: 'ok' });
       // console.log('User session:', req.session.user);
     } else {
       res.status(401).json({
@@ -100,7 +102,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
-  console.log(121112121212);
+  // console.log(121112121212);
   await req.session.destroy();
   if (!req.session) {
     res.clearCookie('user_sid');
