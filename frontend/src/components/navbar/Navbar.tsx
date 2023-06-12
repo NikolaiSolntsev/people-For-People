@@ -23,7 +23,7 @@ function Navbar(): JSX.Element {
               <Link to="/">Hа главную</Link>
             </div>
             <div>
-              <Link to="/">Мои услуги</Link>
+              <Link to="/profile">Мои услуги</Link>
             </div>
             <div>
               <Link to="/servicesForMee">услуги для меня</Link>

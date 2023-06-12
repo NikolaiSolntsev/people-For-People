@@ -1,12 +1,11 @@
-
 import React, { useEffect } from 'react';
 
 
 
+import { Routes, Route } from 'react-router-dom';
 import Main from '../components/main/item/Main';
 import MyServiceItem from '../components/myService/item/MyServiceItem';
 
-import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 // import { Link } from '@mui/material';
@@ -19,6 +18,8 @@ import { getAllServices } from '../components/servicesFoMee/servicesSlice/servic
 import { useSelector } from 'react-redux';
 import ServicesForMeeList from '../components/servicesFoMee/items/ServicesForMeeList';
 import AboutServiceForMee from '../components/servicesFoMee/items/AboutServiceForMee';
+import Profile from '../components/authentication/Profile/item/Profile';
+import MyServiceList from '../components/myService/item/MyServiceList';
 
 
 function App(): JSX.Element {
@@ -46,6 +47,9 @@ dispatch(getAllServices())
         <Route path="/login" element={<LogForm />} />
         <Route path='/servicesForMee' element={<ServicesForMeeList/>}/>
         <Route path='/servicesForMee/:service_id' element={<AboutServiceForMee/>}/>
+        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/myServices' element={<MyServiceList/>}/>
+        {/* <Route path='/history' element={<History/>}/> */}
       </Routes>
 
     </div>
