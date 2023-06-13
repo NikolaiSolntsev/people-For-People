@@ -15,6 +15,7 @@ socket.on('connect', () => {
 
   socket.on('chat:incoming', (message) => {
     if(message.for === 'saler') {
+      
         messagesSet(message.data)
     }
         })
@@ -28,7 +29,11 @@ const {myServices} = useSelector( (store) => store.allServices);
 const services = myServices.filter(service => service.seller_id === user?.id)
 
 const [messages, setMessages] = useState([]);
-messagesSet = setMessages;
+
+function getSet () {
+  messagesSet = setMessages;
+}
+
 
 
 
@@ -36,14 +41,16 @@ function getAccountChatMessages () {
 fetch(`/api/getAccountChatMessages/${user.id}`)
 .then(res => res.json())
 .then(data => {
+  getSet()
   messagesSet(data.messChats)
+  console.log(data.messChats)
 })
 }
 
 
 useEffect( () => {
  user && getAccountChatMessages()
-}, [user])
+}, [ user])
 
 
 //????????

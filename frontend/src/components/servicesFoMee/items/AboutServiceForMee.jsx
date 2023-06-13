@@ -4777,7 +4777,9 @@ socket.on('chat:incoming', (message) => {
 function AboutServiceForMee () {
 
 const [messages, setMessages] = useState([]);
-messagesSet = setMessages;
+function getSet () {
+  messagesSet = setMessages;
+}
 
 const {service_id} = useParams();
 const {myServices} = useSelector( (store) => store.allServices);
@@ -4793,7 +4795,7 @@ fetch(`/api/getAboutChatMessages/${service.id}`)
 .then(data => {
 
  const valid = data.messages.filter(el => el.by === user.id || el.by === service.User.id)
-  
+  getSet()
 messagesSet(valid)
 })
 }

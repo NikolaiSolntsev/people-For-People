@@ -15,9 +15,10 @@ import { getAllServices } from '../components/servicesFoMee/servicesSlice/servic
 import { useSelector } from 'react-redux';
 import ServicesForMeeList from '../components/servicesFoMee/items/ServicesForMeeList';
 import AboutServiceForMee from '../components/servicesFoMee/items/AboutServiceForMee';
-import Account from '../components/account/items/Account';
 import Profile from '../components/authentication/Profile/item/Profile';
 import MyServiceList from '../components/myService/item/MyServiceList';
+import Account from '../components/account/items/Account';
+
 
 
 function App(): JSX.Element {
