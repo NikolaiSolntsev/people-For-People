@@ -75,6 +75,7 @@ router.route('/registration').post(async (req, res) => {
       phone,
       password: hash,
       email,
+      language,
     });
 
     req.session.user = {
@@ -82,6 +83,8 @@ router.route('/registration').post(async (req, res) => {
       name: newUser.name,
       phone: newUser.phone,
       email: newUser.email,
+      language: newUser.language,
+      score: newUser.score
     };
 
     // console.log('User session:', req.session.user);
