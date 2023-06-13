@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import AccountService from "./AccountService";
@@ -29,6 +29,21 @@ const services = myServices.filter(service => service.seller_id === user?.id)
 
 const [messages, setMessages] = useState([]);
 messagesSet = setMessages;
+
+
+
+function getAccountChatMessages () {
+fetch(`/api/getAccountChatMessages/${user.id}`)
+.then(res => res.json())
+.then(data => {
+  messagesSet(data.messChats)
+})
+}
+
+
+useEffect( () => {
+ user && getAccountChatMessages()
+}, [user])
 
 
 //????????

@@ -11,6 +11,8 @@ const apiCountriesRouter = require('./routes/api/routes.countries');
 
  const apiAuthRoute = require('./routes/api/routes.personalisation');
  const servicesForMee = require('./routes/api/routes.servicesForMee');
+ const GetAboutChatMessagesRouter = require('./routes/api/routes.getAboutChatMessages'); 
+ const GetAccountChatMessagesRouter = require('./routes/api/routes.getAccountChatMessages'); 
 
 //////////////////////////////////////////////////////////////////////////
 const http = require('http');
@@ -83,10 +85,10 @@ serverConfig(app);
 
 app.use('/api', apiRouterPersonalisation);
 app.use('/api/countries', apiCountriesRouter);
-
-
 app.use('/api/auth', apiAuthRoute);
 app.use('/api/servicesForMee', servicesForMee)
+app.use('/api/getAboutChatMessages', GetAboutChatMessagesRouter);
+app.use('/api/getAccountChatMessages', GetAccountChatMessagesRouter);
 
 
 

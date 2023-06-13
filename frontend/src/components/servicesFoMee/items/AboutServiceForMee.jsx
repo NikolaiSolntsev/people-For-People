@@ -4786,6 +4786,24 @@ const [text, setText] = useState('');
 
 
 
+function getAboutChatMessages () {
+fetch(`/api/getAboutChatMessages/${service.id}`)
+.then(res => res.json())
+.then(data => {
+
+ const valid = data.messages.filter(el => el.by === user.id || el.by === service.User.id)
+  
+messagesSet(valid)
+})
+}
+
+
+useEffect( () => {
+ service && getAboutChatMessages()
+}, [service])
+
+
+
 
 function addChatMessage() {
   socket.emit('chat:outgoing', 
