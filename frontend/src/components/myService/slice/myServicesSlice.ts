@@ -1,15 +1,42 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import * as api from '../api';
 import { MyServicesState } from '../type/MyServicesState';
+import User from '../../user/type/User';
 
-const initialState: MyServicesState = { myServices: [] };
+const initialState: MyServicesState = { myServices: [], error: '' };
 
-const servicesSlice = createSlice({
+export const myServicesInit = createAsyncThunk(
+  'myServices/init',
+  () => api.getMyServices()
+);
+
+export const serviceAdd = createAsyncThunk('myServices/add', (obj: FormData) =>
+  api.addServiceFetch(obj)
+);
+
+const myServicesSlice = createSlice({
   name: 'myServices',
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(myServicesInit.fulfilled, (state, action) => {
+        state.myServices = action.payload;
+        state.error = '';
+      })
+      .addCase(myServicesInit.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(serviceAdd.fulfilled, (state, action) => {
+        state.myServices = action.payload;
+        state.error = '';
+      })
+      .addCase(serviceAdd.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
+  },
 });
 
-export const {} = servicesSlice.actions;
+// export const {} = myServicesSlice.actions;
 
-export default servicesSlice.reducer;
+export default myServicesSlice.reducer;

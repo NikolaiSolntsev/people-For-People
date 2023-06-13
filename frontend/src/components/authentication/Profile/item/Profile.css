@@ -1,0 +1,26 @@
+.profile{
+    display:flex;
+    flex-direction: column;
+}
+.serv{
+    border: none;
+    background: none;
+}
+.prof{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.buttonGroup{
+    align-self: flex-start;
+}
+.avatar{
+    width: 300px;
+    height: 400px;
+}
+.ava img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
