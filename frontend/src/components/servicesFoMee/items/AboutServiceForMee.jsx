@@ -4759,7 +4759,7 @@ import ChatMessageList from "./ChatMessageList";
 /////////////
 
 
-let messagesSet = [];
+let messages = [];
 
 
 export let socket = io();
@@ -4767,19 +4767,27 @@ socket.on('connect', () => {
   console.log('ws about')
 })
 
+
 socket.on('chat:incoming', (message) => {
-  console.log('about', message)
-  if(message.for === 'bayer') {
-    messagesSet(message.data);
-  }
+  console.log('bayer', message)
+  // if(message.for === 'bayer') {
+  // 
+
+  messages = message.bayer;
+  console.log(message.bayer)
+  // }
     })
+
+
+
 
 function AboutServiceForMee () {
 
-const [messages, setMessages] = useState([]);
-function getSet () {
-  messagesSet = setMessages;
-}
+//const [messages, setMessages] = useState([]);
+const [draw, setDraw] = useState(true)
+
+  //messagesSet = setMessages;
+
 
 const {service_id} = useParams();
 const {myServices} = useSelector( (store) => store.allServices);
@@ -4787,6 +4795,11 @@ const [service] = myServices.filter(el => el.id === Number(service_id))
 const {user} = useSelector( (store) => store.auth)
 const [text, setText] = useState('');
 
+useEffect( () => {
+  setInterval( () => {
+setDraw( (prev) => !prev)
+  },300)
+}, [])
 
 
 function getAboutChatMessages () {
@@ -4794,9 +4807,10 @@ fetch(`/api/getAboutChatMessages/${service.id}`)
 .then(res => res.json())
 .then(data => {
 
- const valid = data.messages.filter(el => el.by === user.id || el.by === service.User.id)
-  getSet()
-messagesSet(valid)
+ const valid = data.messages.filter(el => el.bayer_id === user.id)
+
+//setMessages(valid)
+messages = valid
 })
 }
 
@@ -4821,7 +4835,7 @@ function addChatMessage() {
 }
 
 
-
+const messagesOk = messages.filter(el => el.bayer_id === user.id )
 
 
     return (
@@ -4845,7 +4859,7 @@ function addChatMessage() {
     <input type="text" onChange={(e) => setText(e.target.value)}/>
     <button type="submit">add massage</button>
    </form>
-   <ChatMessageList chatMessages={messages}/>
+   <ChatMessageList chatMessages={messagesOk}/>
 
 </div>
 </>
@@ -4853,5 +4867,7 @@ function addChatMessage() {
         </div>
     )
 }
+
+
 
 export default AboutServiceForMee;

@@ -9,3 +9,4 @@ export async function getServicesForMee (): Promise<MyService[]> {
 export function getAbout ({service, navigate}: {service: MyService, navigate: (value: string) => void}): void {
 navigate(`/servicesForMee/${service.id}`)
 }
+
