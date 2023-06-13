@@ -2,49 +2,70 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
 
-// router.get('/user', async (req, res) => {
-//   console.log(res.locals);
-//   const { user } = res.locals;
-//   // console.log('ssssssssssss', user);
-//   if (user) {
-//     res.status(201).json(
-//       {
-//         isLoggedIn: true,
-//         user: {
-//           id: user.id,
-//           name: user.name,
-//           phone: user.phone,
-//         },
-//       },
-//       console.log(user, 'aaaaaaaaaaa')
-//     );
-//   } else {
-//     res.status(500).json({ isLoggedIn: false });
-//   }
-// });
+router.route('/change').put(async (req,res)=> {
+  const { name, email, language,  photo } = req.body; 
+try {
+    const newUser = await User.findOne({where:{id:Number(req.session.user.id)}});
+  if(newUser){
+  
+newUser.name = name;
+newUser.email = email;
+newUser.language = language;
+newUser.photo = photo;
 
-router.route('/check').get((req, res) => {
-  const { user } = req.session;
-  res.json({ message: 'ok', user });
-});
+await newUser.save();
+req.session.user = {
+  id: newUser.id,
+  name: newUser.name,
+  email: newUser.email,
+  score: newUser.score,
+  phone: newUser.phone,
+  language:newUser.language,
+  photo:newUser.photo,
+};
+res.status(200).json({ newUser, message: 'ok' });
+
+}else {
+  res.status(401).json({
+    message:
+      'Такого пользователя нет либо пароли не совпадают' , 
+    user: undefined,
+  });
+}
+} catch (error) {
+  res.json({ message: error.message });
+}
+})
+
+router.route('/check')
+.get( (req, res) => {
+const { user } = req.session;
+  res.json({message: 'ok', user})
+})
+
 
 router.route('/registration').post(async (req, res) => {
-  // console.log('122333');
-
+  console.log('122333');
   try {
     const { name, phone, password, email, language } = req.body;
+
+
+
     if (!name || !phone || !password || !email || !language) {
       res.status(400).json({ message: 'Заполните все поля' });
       return;
     }
+
     const user = await User.findOne({ where: { phone } });
     if (user) {
       res.status(422).json({
+
         message: 'Такой пользователь уже существует.',
         user: undefined,
       });
       return;
     }
+
     const hash = await bcrypt.hash(password, 10);
     if (!hash) {
       throw new Error('Error generating password hash');
@@ -54,12 +75,18 @@ router.route('/registration').post(async (req, res) => {
       phone,
       password: hash,
       email,
+      language,
     });
+
     req.session.user = {
       id: newUser.id,
       name: newUser.name,
       phone: newUser.phone,
+      email: newUser.email,
+      language: newUser.language,
+      score: newUser.score
     };
+
     // console.log('User session:', req.session.user);
     res.json({
       id: newUser.id,
@@ -67,11 +94,13 @@ router.route('/registration').post(async (req, res) => {
       name: newUser.name,
       message: 'ok',
     });
+
   } catch (err) {
     console.log(err);
     res.json({ message: err.message });
   }
 });
+
 router.post('/login', async (req, res) => {
   // console.log(req.body);
   try {
@@ -83,12 +112,12 @@ router.post('/login', async (req, res) => {
     }
 
     const user = await User.findOne({ where: { phone }, raw: true });
-    console.log(user);
+  
     if (user && (await bcrypt.compare(password, user.password))) {
-      req.session.user = { id: user.id, name: user.name, phone: user.phone };
+      req.session.user = { id: user.id, name: user.name, phone: user.phone, email:user.email, score: user.score, photo: user.photo, language: user.language};
 
       res.status(200).json({ user: req.session.user, message: 'ok' });
-      // console.log('User session:', req.session.user);
+   
     } else {
       res.status(401).json({
         message:
@@ -102,7 +131,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
-  // console.log(121112121212);
+
   await req.session.destroy();
   if (!req.session) {
     res.clearCookie('user_sid');
@@ -112,41 +141,6 @@ router.get('/logout', async (req, res) => {
   }
 });
 
-router.route('/change').post(async (req, res) => {
 
-  try {
-    const { name, password, email, language } = req.body;
-
-    if (!name || !phone || !password || !email || !language) {
-      res.status(400).json({ message: 'Заполните все поля' });
-      return;
-    }
-
-    const user = await User.findOne({ where: { phone } });
-
-    if (user) {
-      res.json({
-        message: 'Такой пользователь уже существует.',
-        user: undefined,
-      });
-      return;
-    }
-
-    const hash = await bcrypt.hash(password, 10);
-
-    const newUser = await User.create({ name, phone, password: hash, email });
-
-    req.session.user = {
-      id: newUser.id,
-      name: newUser.name,
-      phone: newUser.phone,
-    };
-
-    res.json({ user: req.session.user, message: 'ok' });
-  } catch (err) {
-    console.log(err);
-    res.json({ message: err.message });
-  }
-});
 
 module.exports = router;

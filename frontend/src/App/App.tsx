@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom';
-import MyServiceItem from '../components/myService/item/MyServiceItem';
 import Navibar from '../components/navbar/Navibar';
 import RegForm from '../components/authentication/item/RegForm';
 import LogForm from '../components/authentication/item/LogForm';
 import { userCheck } from '../components/authentication/authSlice/authSlice';
-import { useAppDispatch } from '../store';
 import { getAllServices } from '../components/servicesFoMee/servicesSlice/servicesSlice';
 import ServicesForMeeList from '../components/servicesFoMee/items/ServicesForMeeList';
 import AboutServiceForMee from '../components/servicesFoMee/items/AboutServiceForMee';
@@ -14,6 +12,8 @@ import Profile from '../components/authentication/Profile/item/Profile';
 import MyServiceList from '../components/myService/item/MyServiceList';
 import Account from '../components/account/items/Account';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import { useAppDispatch } from '../store';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -25,14 +25,11 @@ function App(): JSX.Element {
 
   return (
     <div className='App'>
-      <div className='App'>
-        <MyServiceItem />
-      </div>
       <Navibar />
+
       <Routes>
         <Route path='/profile' element={<Profile />} />
         <Route path='/myServices' element={<MyServiceList />} />
-        {/* <Route path='/history' element={<History/>}/> */}
         <Route path='/registration' element={<RegForm />} />
         <Route path='/login' element={<LogForm />} />
         <Route path='/servicesForMee' element={<ServicesForMeeList />} />

@@ -1,11 +1,13 @@
 import City from './City';
 
-type Country = {
+export type Country = {
   id: number;
-  сountryName: string;
+  countryName: string;
   value: string;
   lable: string;
   Cities: City[];
+  countryCode: string;
+  label: string;
+  phoneCode: string;
+  suggested?: boolean;
 };
-
-export default Country;
