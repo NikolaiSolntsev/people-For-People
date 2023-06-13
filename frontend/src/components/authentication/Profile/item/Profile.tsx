@@ -1,73 +1,96 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { InputLabel, MenuItem, Select } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../../store';
 import { changeUser } from '../../authSlice/authSlice';
+import './Profile.css'
 
 function Profile(): JSX.Element {
-  const [language, setLanguage] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-
   const { user } = useSelector((store: RootState) => store.auth);
+  const [language, setLanguage] = useState(user?.language);
+  const [name, setName] = useState(user?.name);
+  const [email, setEmail] = useState(user?.email);
+  const [photo, setPhoto] = useState(user?.photo);
+  
+  useEffect(()=>{
+    if(user){
+setName(user?.name)
+setEmail(user.email)
+setPhoto(user.photo)
+setLanguage(user.language)
+    }
+  },[user])
+  
   const dispatch = useAppDispatch();
 
   const saveChange: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
     dispatch(
       changeUser({
+        id:user?.id,
         name,
-        newPassword,
-        password: oldPassword,
         language,
         email,
+        photo,
       })
     );
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className='profile' >
       <h4>мои услуги</h4>
       <div className='profile'>
         <div>
-          <button type='button'>
+          <button className='serv' type='button'>
             <Link to='/myServices'>мои услуги</Link>
           </button>
         </div>
         <div>
-          <button type='button'>
+          <button className='serv' type='button'>
             <Link to='/history'>история заказов и услуг</Link>
           </button>
         </div>
       </div>
 
-      <form onSubmit={saveChange}>
+      <form onSubmit={saveChange} className='formDiv'>
         <div>
           <img src={user?.photo} alt='img' />
         </div>
+        <div>твои баллы:  {user?.score}</div>
         <div> your phone: {user?.phone}</div>
         <br />
         <br />
+        <div className='changeForm'>
+        <h5>изменить:</h5>
         <label>
           name
           <input
-            placeholder={user?.name}
+            // placeholder={user?.name}
             onChange={(e) => setName(e.target.value)}
-            value={user?.name}
+            value={name}
+          />
+        </label>
+        <br />
+        <label>
+          photo
+          <input
+            // placeholder={user?.photo}
+            onChange={(e) => setPhoto(e.target.value)}
+            value={photo}
           />
         </label>
         <br />
         <label>
           email
           <input
-            placeholder={user?.email}
+            // placeholder={user?.email}
             onChange={(e) => setEmail(e.target.value)}
-            value={user?.email}
+           value={email}
           />
         </label>
+        <div> language:  {user?.language}  </div>
         <InputLabel id='demo-simple-select-required-label'>
           изменить язык
         </InputLabel>
@@ -84,19 +107,9 @@ function Profile(): JSX.Element {
           <MenuItem value='english'>english</MenuItem>
         </Select>
         <br />
-        <label>
-          edit password
-          <input
-            placeholder='old password'
-            onChange={(e) => setOldPassword(e.target.value)}
-          />
-          <br />
-          <input
-            placeholder='new password'
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </label>
+       
         <button type='submit'>save</button>
+        </div>
       </form>
     </div>
   );

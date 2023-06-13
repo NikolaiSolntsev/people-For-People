@@ -8,11 +8,19 @@ align-items: center;
 }
 .links{
     
-    width: 250px;
+    width: 600px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 a{
     text-decoration: none;
+}
+.logout{
+    border: none;
+    background:none;
+}
+.link{
+    width: 100px;
 }

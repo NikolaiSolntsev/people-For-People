@@ -18,8 +18,10 @@ export const userRegistration = createAsyncThunk(
 );
 
 
+
 export const changeUser = createAsyncThunk('user/change', (obj: User) =>
   api.changeUserFetch(obj)
+
 );
 
 export const userLogin = createAsyncThunk(
