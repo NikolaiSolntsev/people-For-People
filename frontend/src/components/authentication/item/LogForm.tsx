@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../store';
 import { userLogin } from '../authSlice/authSlice';
 
+
 function LogForm(): JSX.Element {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -67,6 +68,7 @@ function LogForm(): JSX.Element {
       <h2>{error}</h2>
     </div>
   );
+
 }
 
 export default LogForm;

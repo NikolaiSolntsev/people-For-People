@@ -18,6 +18,7 @@ export const registrationFetch = async (obj: User): Promise<User> => {
   return user;
 };
 
+
 export async function loginFetch(credentials: Credentials): Promise<User> {
   const response = await fetch('/api/auth/login', {
     method: 'POST',
@@ -37,14 +38,11 @@ export async function loginFetch(credentials: Credentials): Promise<User> {
 export const logoutFetch = async (): Promise<void> => {
   const response = await fetch('/api/auth/logout');
 
-
   if (!response.ok) {
     const { message } = await response.json();
     throw message;
   }
 };
-
-
 
 export const  checkUser = async (): Promise<User> => {
  const response = await fetch('/api/auth/check')
@@ -69,3 +67,4 @@ export const changeUserFetch = async (obj: User): Promise<User> => {
  
   return newUser;
 };
+

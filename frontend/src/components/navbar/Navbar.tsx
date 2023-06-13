@@ -18,12 +18,14 @@ function Navbar(): JSX.Element {
       <div className="links">
         {user?.id ? (
           <>
+
             <div className='link'> {user && `Привет ${user.name}!`}</div>
             <div className='link'>
               <Link to="/">Hа главную</Link>
             </div>
             <div className='link'>
               <Link to="/profile">Profile</Link>
+
             </div>
             <div className='link'>
               <Link to="/servicesForMee">услуги для меня</Link>
