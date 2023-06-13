@@ -26,6 +26,7 @@ function Navibar(): JSX.Element {
           </Nav.Link>
           {user?.id ? (
             <>
+              <div> {user && `Привет ${user.name}!`}</div>
               <Nav.Link>
                 <Link to='/profile'>Profile</Link>
               </Nav.Link>
