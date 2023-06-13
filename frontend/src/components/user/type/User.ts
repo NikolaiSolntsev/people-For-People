@@ -2,7 +2,9 @@ type User = {
   id?: number;
   name?: string;
   password?: string;
+
   newPassword?: string;
+
   email?: string;
   language?: string;
   phone?: string;

@@ -18,31 +18,33 @@ function Navbar(): JSX.Element {
       <div className="links">
         {user?.id ? (
           <>
-            <div> {user && `Привет ${user.name}!`}</div>
-            <div>
+
+            <div className='link'> {user && `Привет ${user.name}!`}</div>
+            <div className='link'>
               <Link to="/">Hа главную</Link>
             </div>
-            <div>
-              <Link to="/profile">Мои услуги</Link>
+            <div className='link'>
+              <Link to="/profile">Profile</Link>
+
             </div>
-            <div>
+            <div className='link'>
               <Link to="/servicesForMee">услуги для меня</Link>
             </div>
-            <div>
-              <Link to={`/account/${user.id}`}>личный кабинет</Link>
+            <div className='link'> 
+              <Link to={`/account/${user.id}`}>мои услуги</Link>
             </div>
             <div>
-              <button type="button" onClick={logout}>
+              <button type="button" className='logout' onClick={logout}>
                 <Link to="/">Выйти</Link>
               </button>
             </div>
           </>
         ) : (
           <>
-            <div>
+            <div className='link'>
               <Link to="/login">Войти</Link>
             </div>
-            <div>
+            <div className='link'>
               <Link to="/registration">Зарегистрироваться</Link>
             </div>
           </>
