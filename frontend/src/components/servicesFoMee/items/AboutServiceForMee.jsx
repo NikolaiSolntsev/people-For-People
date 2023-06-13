@@ -1,9 +1,10 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { RootState } from "../../../store";
 import { MyService } from "../../myService/type/MyService";
-
+import ChatMessageList from "./ChatMessageList";
 
 ///////////////////
 
@@ -4758,11 +4759,69 @@ import { MyService } from "../../myService/type/MyService";
 /////////////
 
 
+let messagesSet = [];
+
+
+export let socket = io();
+socket.on('connect', () => {
+  console.log('ws about')
+})
+
+socket.on('chat:incoming', (message) => {
+  console.log('about', message)
+  if(message.for === 'bayer') {
+    messagesSet(message.data);
+  }
+    })
+
 function AboutServiceForMee () {
+
+const [messages, setMessages] = useState([]);
+messagesSet = setMessages;
 
 const {service_id} = useParams();
 const {myServices} = useSelector( (store) => store.allServices);
 const [service] = myServices.filter(el => el.id === Number(service_id))
+const {user} = useSelector( (store) => store.auth)
+const [text, setText] = useState('');
+
+
+
+function getAboutChatMessages () {
+fetch(`/api/getAboutChatMessages/${service.id}`)
+.then(res => res.json())
+.then(data => {
+
+ const valid = data.messages.filter(el => el.by === user.id || el.by === service.User.id)
+  
+messagesSet(valid)
+})
+}
+
+
+useEffect( () => {
+ service && getAboutChatMessages()
+}, [service])
+
+
+
+
+function addChatMessage() {
+  socket.emit('chat:outgoing', 
+  {text: {
+  bayer_id: user.id,
+  saler_id: service.User.id,
+  myService_id: service.id,
+  by: user.id,
+  text
+  }, timestemp: new Date()}
+  )
+}
+
+
+
+
+
     return (
         <div>
             { service &&
@@ -4774,6 +4833,18 @@ const [service] = myServices.filter(el => el.id === Number(service_id))
 
 <div>
     <h1>ваш чат с владельцем обЪявления:</h1>
+
+   <form action=""
+   onSubmit={(e) => {
+    e.preventDefault()
+    addChatMessage()
+  }}
+   >
+    <input type="text" onChange={(e) => setText(e.target.value)}/>
+    <button type="submit">add massage</button>
+   </form>
+   <ChatMessageList chatMessages={messages}/>
+
 </div>
 </>
 }

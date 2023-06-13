@@ -2,49 +2,37 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
 
-// router.get('/user', async (req, res) => {
-//   console.log(res.locals);
-//   const { user } = res.locals;
-//   // console.log('ssssssssssss', user);
-//   if (user) {
-//     res.status(201).json(
-//       {
-//         isLoggedIn: true,
-//         user: {
-//           id: user.id,
-//           name: user.name,
-//           phone: user.phone,
-//         },
-//       },
-//       console.log(user, 'aaaaaaaaaaa')
-//     );
-//   } else {
-//     res.status(500).json({ isLoggedIn: false });
-//   }
-// });
 
-router.route('/check').get((req, res) => {
-  const { user } = req.session;
-  res.json({ message: 'ok', user });
-});
+
+router.route('/check')
+.get( (req, res) => {
+const { user } = req.session;
+  res.json({message: 'ok', user})
+})
+
 
 router.route('/registration').post(async (req, res) => {
-  // console.log('122333');
-
+  console.log('122333');
   try {
     const { name, phone, password, email, language } = req.body;
+
+
+
     if (!name || !phone || !password || !email || !language) {
       res.status(400).json({ message: 'Заполните все поля' });
       return;
     }
+
     const user = await User.findOne({ where: { phone } });
     if (user) {
       res.status(422).json({
+
         message: 'Такой пользователь уже существует.',
         user: undefined,
       });
       return;
     }
+
     const hash = await bcrypt.hash(password, 10);
     if (!hash) {
       throw new Error('Error generating password hash');
@@ -55,11 +43,13 @@ router.route('/registration').post(async (req, res) => {
       password: hash,
       email,
     });
+
     req.session.user = {
       id: newUser.id,
       name: newUser.name,
       phone: newUser.phone,
     };
+
     // console.log('User session:', req.session.user);
     res.json({
       id: newUser.id,
@@ -67,11 +57,13 @@ router.route('/registration').post(async (req, res) => {
       name: newUser.name,
       message: 'ok',
     });
+
   } catch (err) {
     console.log(err);
     res.json({ message: err.message });
   }
 });
+
 router.post('/login', async (req, res) => {
   // console.log(req.body);
   try {
@@ -147,6 +139,7 @@ router.route('/change').post(async (req, res) => {
     console.log(err);
     res.json({ message: err.message });
   }
+
 });
 
 module.exports = router;
