@@ -28,6 +28,12 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER,
       },
+      description: {
+        type: Sequelize.TEXT,
+      },
+      image: {
+        type: DataTypes.TEXT,
+      },
       city_id: {
         type: Sequelize.INTEGER,
         references: {

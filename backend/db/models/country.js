@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      countryCode: {
+        type: DataTypes.TEXT,
+      },
+      phoneCode: {
+        type: DataTypes.TEXT,
+      },
       сountryName: {
         type: DataTypes.TEXT,
       },
