@@ -75,6 +75,7 @@ router.route('/registration').post(async (req, res) => {
       phone,
       password: hash,
       email,
+      language,
     });
 
     req.session.user = {
@@ -82,6 +83,8 @@ router.route('/registration').post(async (req, res) => {
       name: newUser.name,
       phone: newUser.phone,
       email: newUser.email,
+      language: newUser.language,
+      score: newUser.score
     };
 
     // console.log('User session:', req.session.user);
@@ -111,10 +114,10 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ where: { phone }, raw: true });
   
     if (user && (await bcrypt.compare(password, user.password))) {
-      req.session.user = { id: user.id, name: user.name, phone: user.phone, email:user.email, score: user.score, photo: user.photo };
+      req.session.user = { id: user.id, name: user.name, phone: user.phone, email:user.email, score: user.score, photo: user.photo, language: user.language};
 
       res.status(200).json({ user: req.session.user, message: 'ok' });
-      // console.log('User session:', req.session.user);
+   
     } else {
       res.status(401).json({
         message:
@@ -128,7 +131,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
-  // console.log(121112121212);
+
   await req.session.destroy();
   if (!req.session) {
     res.clearCookie('user_sid');
