@@ -1,3 +1,5 @@
+import { CityState } from "./CityState";
+
 type City = {
   id: number;
   cityName: string;

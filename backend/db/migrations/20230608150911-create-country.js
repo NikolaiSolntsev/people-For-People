@@ -9,7 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      сountryName: {
+      countryCode: {
+        type: Sequelize.TEXT,
+      },
+      phoneCode: {
+        type: Sequelize.TEXT,
+      },
+      countryName: {
         type: Sequelize.TEXT,
       },
       createdAt: {

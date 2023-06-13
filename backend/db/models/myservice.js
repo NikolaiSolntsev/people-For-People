@@ -43,6 +43,12 @@ module.exports = (sequelize, DataTypes) => {
       price: {
         type: DataTypes.INTEGER,
       },
+      description: {
+        type: DataTypes.TEXT,
+      },
+      image: {
+        type: DataTypes.TEXT,
+      },
       city_id: {
         type: DataTypes.INTEGER,
         references: {
