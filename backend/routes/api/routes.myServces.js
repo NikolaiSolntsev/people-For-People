@@ -1,14 +1,14 @@
 const router = require('express').Router();
-const { MyService, User, City, Service } = require('../../db/models');
+const { MyService, User, City, Service, Country } = require('../../db/models');
 
 router.route('/').get(async (req, res) => {
   console.log(req.session.user.id);
   try {
     const myServices = await MyService.findAll({
       where: { seller_id: req.session.user.id },
-      include: [{ model: User }, { model: City }, { model: Service }],
+      include: [{ model: User }, { model: City, include: { model: Country }}, { model: Service }],
     });
-    // console.log(myServices, 'qtttttttttttqqqqq');
+    console.log(myServices);
     res.json({ myServices });
   } catch (err) {
     console.log(err);

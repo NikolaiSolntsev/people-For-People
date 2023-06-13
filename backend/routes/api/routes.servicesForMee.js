@@ -4,9 +4,12 @@ const { MyService, User, City, Service } = require('../../db/models');
 router.route('/').get(async (req, res) => {
   try {
     const myServices = await MyService.findAll({
-      include: [{ model: User }, { model: City }, { model: Service }],
+      include: [
+        { model: User },
+        { model: City },
+        { model: Service },
+      ],
     });
-    // console.log(myServices);
     res.json({ myServices });
   } catch (err) {
     res.json({ message: err.message });
@@ -17,9 +20,9 @@ router.post('/', async (req, res) => {
   try {
     const { image } = req.files;
     const { price, country, city, description } = req.body;
-  
-      image.map(async (el) => await fileuploadMiddeleware(el))
-    
+
+    image.map(async (el) => await fileuploadMiddeleware(el));
+
     const imageService = await MyService.create({
       price,
       country,
