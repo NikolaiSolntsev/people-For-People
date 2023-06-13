@@ -6,7 +6,6 @@ import { MyService } from './type/MyService';
 export const getMyServices = async (): Promise<MyService[]> => {
   const res = await fetch(`/api/myServices`);
   const data = await res.json();
-  console.log(data, 'bbbbbbbbbbb');
   return data.myServices;
 };
 

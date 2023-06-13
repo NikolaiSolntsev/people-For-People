@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Autocomplete, Box, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../store';
 import { serviceAdd } from '../slice/myServicesSlice';
+import { countryInit } from '../slice/countriesSlice ';
 
 function AddServiceForm(): JSX.Element {
   const { countries } = useSelector((store: RootState) => store.countries);
@@ -17,11 +18,15 @@ function AddServiceForm(): JSX.Element {
   const priceInput = useRef<HTMLInputElement>(null);
   const descriptionInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(countryInit());
+  }, [ dispatch]);
 
-  console.log(priceInput.current?.value);
+ 
 
-  const addForm = (e: React.FormEvent<HTMLFormElement>):void => {
+  const addForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    console.log(countryInput.current?.value,'===============================');
     if (
       serviceInput.current?.value &&
       countryInput.current?.value &&
@@ -40,7 +45,7 @@ function AddServiceForm(): JSX.Element {
       const description = descriptionInput.current.value;
 
       const formData = new FormData();
-      formData.append('service', service)
+      formData.append('service', service);
       formData.append('country', country);
       formData.append('city', city);
       for (const key in image) {
@@ -66,11 +71,7 @@ function AddServiceForm(): JSX.Element {
           options={myServices}
           sx={{ width: 300 }}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              label="myServices"
-              ref={serviceInput}
-            />
+            <TextField {...params} label="myServices" ref={serviceInput} />
           )}
         />
         {/* input country */}
@@ -116,11 +117,7 @@ function AddServiceForm(): JSX.Element {
             options={cities}
             sx={{ width: 300 }}
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="city"
-                ref={cityInput}
-              />
+              <TextField {...params} label="city" ref={cityInput} />
             )}
           />
           {/* input image */}
@@ -147,7 +144,7 @@ function AddServiceForm(): JSX.Element {
             name="price"
             placeholder="Напишите стоимость"
             ref={priceInput}
-            value="qwerty"
+            // value="qwerty"
           />
           {/* input description */}
           <TextField
@@ -158,7 +155,7 @@ function AddServiceForm(): JSX.Element {
             placeholder="Напишите описание товара.услуги"
             ref={descriptionInput}
           />
-        </div>
+        </div>    
         <button type="submit">Добавить</button>
       </form>
     </div>

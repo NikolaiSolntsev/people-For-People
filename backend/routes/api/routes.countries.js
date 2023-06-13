@@ -9,7 +9,7 @@ router.route('/').get(async (req, res) => {
       },
     });
 
-    res.json({ message: 'ok', countries });
+    res.json( countries );
   } catch (error) {}
 });
 

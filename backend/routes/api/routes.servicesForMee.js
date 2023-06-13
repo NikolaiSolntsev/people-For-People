@@ -23,7 +23,7 @@ try {
     res.json({message: err.message})
 }
 
-
+})
 router.post('/', async (req, res) => {
   try {
     const { image } = req.files;
