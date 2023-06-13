@@ -38,28 +38,32 @@ io.on('connection', (socket) => {
   
    
        
-if(message.text.by === message.text.bayer_id){
-const message_chatData = await MessChat.findAll({where: {
+//if(message.text.by === message.text.bayer_id){ ///////////////////////
+const message_chatBayer = await MessChat.findAll({where: {
     myService_id: message.text.myService_id,
     bayer_id: message.text.bayer_id,
     saler_id: message.text.saler_id
 }, include: {model: User}})
 
-const arr = message_chatData.sort( (a, b ) => b.id - a.id )
-message = {for: 'bayer', data: arr}
+const arr = message_chatBayer.sort( (a, b ) => b.id - a.id )
+//message = {for: 'bayer', data: arr}
 
-io.emit('chat:incoming', message)
+//io.emit('chat:incoming', message)
 
-} else {
-    const message_chatData = await MessChat.findAll({where: {
+//} //////////////////
+// else {
+    const message_chatSaler = await MessChat.findAll({where: {
         saler_id: message.text.saler_id
     }, include: {model: User}});
 
-    const arr = message_chatData.sort( (a, b ) => b.id - a.id )
-message = {for: 'saler', data: arr}
+    const arr1 = message_chatSaler.sort( (a, b ) => b.id - a.id )
+message = {bayer: arr, saler: arr1}
 
-io.emit('chat:incoming', message)
-}
+
+    io.emit('chat:incoming', message)
+
+
+//}
 
         } catch (err) {
            console.log(err.message) 
