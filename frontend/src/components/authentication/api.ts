@@ -66,5 +66,6 @@ export const changeUserFetch = async (obj: User): Promise<User> => {
     throw message;
   }
   const { newUser } = await response.json();
+ 
   return newUser;
 };

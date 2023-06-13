@@ -22,13 +22,12 @@ const { User } = require('../../db/models');
 //     res.status(500).json({ isLoggedIn: false });
 //   }
 // });
-router.put('/change', async (req,res)=> {
-  const { name, email, language, phone, photo } = req.body; 
+router.route('/change').put(async (req,res)=> {
+  const { name, email, language,  photo } = req.body; 
 try {
- 
-    const newUser = await User.findOne({where:{phone, user_id:req.session.user.id}});
-if(newUser){
-newUser.phone = phone;
+    const newUser = await User.findOne({where:{id:Number(req.session.user.id)}});
+  if(newUser){
+  
 newUser.name = name;
 newUser.email = email;
 newUser.language = language;
@@ -56,7 +55,8 @@ res.status(200).json({ newUser, message: 'ok' });
   
  
 } catch (error) {
-  console.log(error);
+  
+  console.log('iiiiiiiiiiiiiiiiiiiiiiiiiii',error);
   res.json({ message: error.message });
 }
 })

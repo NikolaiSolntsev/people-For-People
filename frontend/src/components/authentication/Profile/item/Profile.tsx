@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { InputLabel, MenuItem, Select } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../../store';
 import { changeUser } from '../../authSlice/authSlice';
+import './Profile.css'
 
 function Profile(): JSX.Element {
-  const [language, setLanguage] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [photo, setPhoto] = useState('');
-  
-
   const { user } = useSelector((store: RootState) => store.auth);
+  const [language, setLanguage] = useState(user?.language);
+  const [name, setName] = useState(user?.name);
+  const [email, setEmail] = useState(user?.email);
+  const [photo, setPhoto] = useState(user?.photo);
+  
+  useEffect(()=>{
+    if(user){
+setName(user?.name)
+setEmail(user.email)
+setPhoto(user.photo)
+setLanguage(user.language)
+    }
+  },[user])
+  
   const dispatch = useAppDispatch();
 
   const saveChange: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
     dispatch(
       changeUser({
         id:user?.id,
-        phone: user?.phone,
         name,
         language,
         email,
@@ -30,22 +39,22 @@ function Profile(): JSX.Element {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className='profile' >
       <h4>мои услуги</h4>
       <div className='profile'>
         <div>
-          <button type='button'>
+          <button className='serv' type='button'>
             <Link to='/myServices'>мои услуги</Link>
           </button>
         </div>
         <div>
-          <button type='button'>
+          <button className='serv' type='button'>
             <Link to='/history'>история заказов и услуг</Link>
           </button>
         </div>
       </div>
 
-      <form onSubmit={saveChange}>
+      <form onSubmit={saveChange} className='formDiv'>
         <div>
           <img src={user?.photo} alt='img' />
         </div>
@@ -53,32 +62,35 @@ function Profile(): JSX.Element {
         <div> your phone: {user?.phone}</div>
         <br />
         <br />
+        <div className='changeForm'>
+        <h5>изменить:</h5>
         <label>
           name
           <input
-            placeholder={user?.name}
+            // placeholder={user?.name}
             onChange={(e) => setName(e.target.value)}
-            defaultValue={user?.name}
+            value={name}
           />
         </label>
         <br />
         <label>
           photo
           <input
-            placeholder={user?.photo}
+            // placeholder={user?.photo}
             onChange={(e) => setPhoto(e.target.value)}
-            defaultValue={user?.photo}
+            value={photo}
           />
         </label>
         <br />
         <label>
           email
           <input
-            placeholder={user?.email}
+            // placeholder={user?.email}
             onChange={(e) => setEmail(e.target.value)}
-            defaultValue={user?.email}
+           value={email}
           />
         </label>
+        <div> language:  {user?.language}  </div>
         <InputLabel id='demo-simple-select-required-label'>
           изменить язык
         </InputLabel>
@@ -97,6 +109,7 @@ function Profile(): JSX.Element {
         <br />
        
         <button type='submit'>save</button>
+        </div>
       </form>
     </div>
   );
