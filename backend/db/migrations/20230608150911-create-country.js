@@ -15,7 +15,7 @@ module.exports = {
       phoneCode: {
         type: Sequelize.TEXT,
       },
-      сountryName: {
+      countryName: {
         type: Sequelize.TEXT,
       },
       createdAt: {

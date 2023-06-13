@@ -6,6 +6,7 @@ router.route('/').get(async (req, res) => {
     const myServices = await MyService.findAll({
       include: [{ model: User }, { model: City }, { model: Service }],
     });
+    // console.log(myServices);
     res.json({ myServices });
   } catch (err) {
     res.json({ message: err.message });

@@ -1,5 +1,5 @@
-import * as api from '../api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import * as api from '../api';
 import { CityState } from '../type/CityState';
 
 const initialState: CityState = { cities: [], error: '' };

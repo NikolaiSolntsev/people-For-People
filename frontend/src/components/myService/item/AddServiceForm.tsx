@@ -20,7 +20,7 @@ function AddServiceForm(): JSX.Element {
 
   console.log(priceInput.current?.value);
 
-  const addForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const addForm = (e: React.FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
     if (
       serviceInput.current?.value &&

@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       phoneCode: {
         type: DataTypes.TEXT,
       },
-      сountryName: {
+      countryName: {
         type: DataTypes.TEXT,
       },
     },

@@ -32,7 +32,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       image: {
-        type: DataTypes.TEXT,
+        type: Sequelize.TEXT,
       },
       city_id: {
         type: Sequelize.INTEGER,

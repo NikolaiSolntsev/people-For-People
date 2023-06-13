@@ -1,18 +1,20 @@
-import * as api from '../api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import * as api from '../api';
 import { MyServicesState } from '../type/MyServicesState';
+import User from '../../user/type/User';
 
 const initialState: MyServicesState = { myServices: [], error: '' };
 
-export const myServicesInit = createAsyncThunk('myServices/init', () =>
-  api.getMyServices()
+export const myServicesInit = createAsyncThunk(
+  'myServices/init',
+  () => api.getMyServices()
 );
 
 export const serviceAdd = createAsyncThunk('myServices/add', (obj: FormData) =>
   api.addServiceFetch(obj)
 );
 
-const servicesSlice = createSlice({
+const myServicesSlice = createSlice({
   name: 'myServices',
   initialState,
   reducers: {},
@@ -35,6 +37,6 @@ const servicesSlice = createSlice({
   },
 });
 
-export const {} = servicesSlice.actions;
+// export const {} = myServicesSlice.actions;
 
-export default servicesSlice.reducer;
+export default myServicesSlice.reducer;

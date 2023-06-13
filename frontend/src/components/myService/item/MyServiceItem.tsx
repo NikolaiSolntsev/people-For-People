@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MyService } from '../type/MyService';
 import { useAppDispatch } from '../../../store';
+import { myServicesInit } from '../slice/myServicesSlice';
 
-function MyServiceItem({
-  myService,
-}: {
-  myService: MyService;
-}): JSX.Element {
+function MyServiceItem({ myService }: { myService: MyService }): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const delServiceItem = () => {
+
+
+  const delServiceItem = ():void => {
     fetch(`/api/servicesForMee/${myService.id}`, {
       method: 'DELETE',
       headers: {
@@ -20,7 +19,7 @@ function MyServiceItem({
       .then((data) => dispatch(data));
   };
 
-  const editServiceItem = () => {
+  const editServiceItem = ():void => {
     fetch(`/api/servicesForMee/${myService.id}`, {
       method: 'PUT',
       headers: {
@@ -31,6 +30,7 @@ function MyServiceItem({
       .then((res) => res.json())
       .then((data) => dispatch(data));
   };
+
 
   return (
     <div
