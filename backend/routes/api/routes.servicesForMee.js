@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { MyService, User, City, Service, MessChat } = require('../../db/models');
 
+
 router.route('/')
 .get( async (req, res) => {
 try {
@@ -9,8 +10,10 @@ try {
         include:[
             {model: User},
             {model: City},
+
             {model: Service},
             {model: MessChat}
+
         ]
     }
     )

@@ -2,14 +2,18 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class MyService extends Model {
+
     static associate({ User, Service, Comment, PhotoMyService, Deal, City, MessChat }) {
+
       this.belongsTo(User, { foreignKey: 'seller_id' });
       this.belongsTo(Service, { foreignKey: 'service_id' });
       this.belongsTo(City, { foreignKey: 'city_id' });
       this.hasMany(Comment, { foreignKey: 'myService_id' });
       this.hasMany(PhotoMyService, { foreignKey: 'myService_id' });
       this.hasMany(Deal, { foreignKey: 'myService_id' });
+
       this.hasMany(MessChat, { foreignKey: 'myService_id'});
+
     }
   }
   MyService.init(

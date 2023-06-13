@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import User from '../../user/type/User';
 import UserState from '../../user/type/UserState';
 import { MyServicesState } from '../../myService/type/MyServicesState';
@@ -18,6 +19,7 @@ const initialState: MyServicesState = { myServices: [] };
 export const getAllServices = createAsyncThunk(
     'allServices/get',
     () => functions.getServicesForMee()
+
 );
 
 const servicesForMeeSlice = createSlice({
@@ -25,6 +27,7 @@ const servicesForMeeSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+
     builder
     .addCase(getAllServices.fulfilled, (state, action) => {
         state.myServices = action.payload;
@@ -40,3 +43,4 @@ const servicesForMeeSlice = createSlice({
 });
 // export const {} = userSlice.actions;
 export default servicesForMeeSlice.reducer;
+

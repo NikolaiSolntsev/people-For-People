@@ -1,3 +1,4 @@
+
 import React from "react";
 import { MyService } from "../../myService/type/MyService";
 
@@ -18,3 +19,4 @@ function AccountService ({service}: {service: MyService}): JSX.Element {
 }
 
 export default AccountService;
+

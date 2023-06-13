@@ -76,11 +76,10 @@ io.emit('chat:incoming', message)
 
 //////////////////////////////////////////////////////
 
-
-
 const PORT = process.env.PORT ?? 4000;
 
 serverConfig(app);
+
 
 
 app.use('/api', apiRouterPersonalisation);
@@ -99,3 +98,4 @@ app.use('/api/getAccountChatMessages', GetAccountChatMessagesRouter);
 httpServer.listen(PORT)
 .on('error', (err) => console.log(err.message) )
 .on('listening', () => console.log('go on port'))
+

@@ -1,10 +1,10 @@
+
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { RootState } from "../../../store";
 import { MyService } from "../../myService/type/MyService";
 import ChatMessageList from "./ChatMessageList";
-
 
 ///////////////////
 
@@ -4758,6 +4758,7 @@ import ChatMessageList from "./ChatMessageList";
   
 /////////////
 
+
 let messagesSet = [];
 
 
@@ -4819,6 +4820,8 @@ function addChatMessage() {
 
 
 
+
+
     return (
         <div>
             { service &&
@@ -4830,6 +4833,7 @@ function addChatMessage() {
 
 <div>
     <h1>ваш чат с владельцем обЪявления:</h1>
+
    <form action=""
    onSubmit={(e) => {
     e.preventDefault()
@@ -4840,6 +4844,7 @@ function addChatMessage() {
     <button type="submit">add massage</button>
    </form>
    <ChatMessageList chatMessages={messages}/>
+
 </div>
 </>
 }

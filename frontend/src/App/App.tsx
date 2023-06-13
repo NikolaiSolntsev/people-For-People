@@ -1,27 +1,23 @@
 
 import React, { useEffect } from 'react';
-
-
-
 import Main from '../components/main/item/Main';
 import MyServiceItem from '../components/myService/item/MyServiceItem';
-
-
-
 import { Routes, Route } from 'react-router-dom';
-
 import './App.css';
-// import { Link } from '@mui/material';
 import Navbar from '../components/navbar/Navbar';
 import RegForm from '../components/authentication/item/RegForm';
 import LogForm from '../components/authentication/item/LogForm';
 import { userCheck } from '../components/authentication/authSlice/authSlice';
+
+
 import { RootState, useAppDispatch } from '../store';
 import { getAllServices } from '../components/servicesFoMee/servicesSlice/servicesSlice';
 import { useSelector } from 'react-redux';
 import ServicesForMeeList from '../components/servicesFoMee/items/ServicesForMeeList';
 import AboutServiceForMee from '../components/servicesFoMee/items/AboutServiceForMee';
 import Account from '../components/account/items/Account';
+import Profile from '../components/authentication/Profile/item/Profile';
+import MyServiceList from '../components/myService/item/MyServiceList';
 
 
 function App(): JSX.Element {
@@ -45,12 +41,15 @@ dispatch(getAllServices())
 
       <Navbar />
       <Routes>
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/myServices' element={<MyServiceList />} />
         <Route path="/registration" element={<RegForm />} />
         <Route path="/login" element={<LogForm />} />
         <Route path='/servicesForMee' element={<ServicesForMeeList/>}/>
         <Route path='/servicesForMee/:service_id' element={<AboutServiceForMee/>}/>
         <Route path='/account/:user_id' element={<Account/>}/>
       </Routes>
+
 
     </div>
   );

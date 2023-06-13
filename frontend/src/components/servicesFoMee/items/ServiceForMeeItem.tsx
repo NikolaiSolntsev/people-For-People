@@ -1,3 +1,4 @@
+
 import React from "react";
 import { MyService } from "../../myService/type/MyService";
 import { getAbout } from "../functions";
@@ -19,3 +20,4 @@ type="button">about</button>
 }
 
 export default ServiceForMeeItem;
+
