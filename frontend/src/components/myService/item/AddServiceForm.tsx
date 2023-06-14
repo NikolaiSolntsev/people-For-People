@@ -17,14 +17,16 @@ function AddServiceForm(): JSX.Element {
   const countryInput = useRef<HTMLSelectElement>(null);
   const cityInput = useRef<HTMLSelectElement>(null);
   const imageInput = useRef<HTMLInputElement>(null);
-  const videoInput = useRef<HTMLInputElement>(null);
+ 
   const priceInput = useRef<HTMLInputElement>(null);
   const descriptionInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   
 
   useEffect(()=>{
- dispatch(nameServicesInit())
+ dispatch(nameServicesInit());
+//  dispatch(citiesInit(1));
+
   },[]);
   useEffect(() => {
     dispatch(countryInit());
@@ -33,20 +35,13 @@ function AddServiceForm(): JSX.Element {
 
    const addForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-   console.log(nameServicesInput.current?.value,'nameServicesInput.current');
-   console.log(countryInput.current?.value,'countryInput.current?.value');
-   console.log(cityInput.current?.value,'cityInput.current?.value');
-   console.log(imageInput.current?.files?.length,'imageInput.current?.files?.length');
-   console.log(videoInput.current?.files?.length,'videoInput.current?.files?.length');
-   console.log(priceInput.current?.value,'priceInput.current?.value');
-   console.log(descriptionInput.current?.value,'descriptionInput.current?.value');
-   
+     
     if (
       nameServicesInput.current?.value &&
       countryInput.current?.value &&
       cityInput.current?.value &&
       imageInput.current?.files?.length &&
-      videoInput.current?.files?.length &&
+     
       priceInput.current?.value &&
       descriptionInput.current?.value
     ) {
@@ -54,7 +49,7 @@ function AddServiceForm(): JSX.Element {
       const country = countryInput.current.value;
       const city = cityInput.current.value;
       const image = imageInput.current.files;
-      const video = videoInput.current.files;
+     
       const price = priceInput.current.value;
       const description = descriptionInput.current.value;
 
@@ -65,9 +60,7 @@ function AddServiceForm(): JSX.Element {
       for (const key in image) {
         formData.append('image', image[key]);
       }
-      for (const key in video) {
-        formData.append('video', video[key]);
-      }
+      
       formData.append('price', price);
       formData.append('description', description);
 
@@ -79,30 +72,27 @@ function AddServiceForm(): JSX.Element {
     <div className="add-service-form">
       <form onSubmit={addForm}>
        
-          <select  ref={nameServicesInput}>
+          <select  ref={nameServicesInput} required>
               {nameServices.map((myserv)=> <option value={myserv.id}> {myserv.serviceName}</option>)}
           </select><br/>
-          <select onChange={(e)=> dispatch(citiesInit(Number(e.target.value)))} ref={countryInput}>
+          <select onChange={(e)=> dispatch(citiesInit(Number(e.target.value)))} ref={countryInput} required>
+          <option value='none'>choice country</option>
               {countries.map((country)=> <option value={country.id}> {country.countryName}</option>)}
           </select><br/>
-          <select ref={cityInput} >
-              {cities.map((city)=> <option value={city.id}>{city.cityName}</option>)}
+          <select ref={cityInput} required>
+            <option value='none'>choice city </option>
+              {cities.map((city)=> <option  value={city.id}>{city.cityName}</option>)}
           </select><br/>
           <label>Добавить фото:<br/>  <input
+          
             type="file"
             className="service-image-input"
             placeholder="Загрузите фото"
             ref={imageInput}
             multiple
+            required
           /></label><br/>
-          {/* input video */}
-         <label>Добавить видео:<br/> <input
-            type="file"
-            className="service-video-input"
-            placeholder="Загрузите видео"
-            ref={videoInput}
-            multiple
-          /></label> <br/>
+       
           {/* input price */}
           <input
             required
@@ -123,7 +113,7 @@ function AddServiceForm(): JSX.Element {
             ref={descriptionInput}
           /><br/>
        
-        <button type="submit">Добавить</button>
+        <button type="submit" >Добавить</button>
       </form>
     </div>
   );
