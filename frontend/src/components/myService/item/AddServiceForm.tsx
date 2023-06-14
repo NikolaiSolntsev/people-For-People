@@ -4,31 +4,38 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../store';
 import { serviceAdd } from '../slice/myServicesSlice';
 import { countryInit } from '../slice/countriesSlice ';
+import { citiesInit } from '../slice/citiesSlice';
+import { getServicesForMee } from '../../servicesFoMee/functions';
+import { nameServicesInit } from '../slice/nameServicesSlice';
 
 function AddServiceForm(): JSX.Element {
   const { countries } = useSelector((store: RootState) => store.countries);
-  const { myServices } = useSelector((store: RootState) => store.allServices);
+  const { nameServices } = useSelector((store: RootState) => store.nameServices);
   const { cities } = useSelector((store: RootState) => store.allCities);
 
-  const serviceInput = useRef<HTMLInputElement>(null);
-  const countryInput = useRef<HTMLInputElement>(null);
-  const cityInput = useRef<HTMLInputElement>(null);
+  const nameServicesInput = useRef<HTMLSelectElement>(null);
+  const countryInput = useRef<HTMLSelectElement>(null);
+  const cityInput = useRef<HTMLSelectElement>(null);
   const imageInput = useRef<HTMLInputElement>(null);
   const videoInput = useRef<HTMLInputElement>(null);
   const priceInput = useRef<HTMLInputElement>(null);
   const descriptionInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
+  console.log(nameServices,'===============================');
+
+  useEffect(()=>{
+ dispatch(nameServicesInit())
+  },[]);
   useEffect(() => {
     dispatch(countryInit());
   }, [ dispatch]);
-
  
 
-  const addForm = (e: React.FormEvent<HTMLFormElement>): void => {
+   const addForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(countryInput.current?.value,'===============================');
+   
     if (
-      serviceInput.current?.value &&
+      nameServicesInput.current?.value &&
       countryInput.current?.value &&
       cityInput.current?.value &&
       imageInput.current?.files?.length &&
@@ -36,7 +43,7 @@ function AddServiceForm(): JSX.Element {
       priceInput.current?.value &&
       descriptionInput.current?.value
     ) {
-      const service = serviceInput.current.value;
+      const service = nameServicesInput.current.value;
       const country = countryInput.current.value;
       const city = cityInput.current.value;
       const image = imageInput.current.files;
@@ -64,78 +71,31 @@ function AddServiceForm(): JSX.Element {
   return (
     <div className="add-service-form">
       <form onSubmit={addForm}>
-        {/* input myService */}
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={myServices}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <TextField {...params} label="myServices" ref={serviceInput} />
-          )}
-        />
-        {/* input country */}
-        <div className="country-input">
-          <Autocomplete
-            id="country-select-demo"
-            sx={{ width: 300 }}
-            options={countries}
-            autoHighlight
-            getOptionLabel={(option) => option.countryName}
-            ref={countryInput}
-            renderOption={(props, option) => (
-              <Box
-                component="li"
-                sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                {...props}
-              >
-                <img
-                  loading="lazy"
-                  width="20"
-                  src={`https://flagcdn.com/w20/${option.countryCode.toLowerCase()}.png`}
-                  srcSet={`https://flagcdn.com/w40/${option.countryCode.toLowerCase()}.png 2x`}
-                  alt=""
-                />
-                {option.countryName} ({option.countryCode}) +{option.phoneCode}
-              </Box>
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Choose a country"
-                inputProps={{
-                  ...params.inputProps,
-                  autoComplete: 'new-password', // disable autocomplete and autofill
-                }}
-              />
-            )}
-          />
-          {/* input city */}
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={cities}
-            sx={{ width: 300 }}
-            renderInput={(params) => (
-              <TextField {...params} label="city" ref={cityInput} />
-            )}
-          />
-          {/* input image */}
-          <input
+       
+          <select  ref={nameServicesInput}>
+              {nameServices.map((myserv)=> <option value={myserv.id}> {myserv.serviceName}</option>)}
+          </select><br/>
+          <select onChange={(e)=> dispatch(citiesInit(Number(e.target.value)))} ref={countryInput}>
+              {countries.map((country)=> <option value={country.id}> {country.countryName}</option>)}
+          </select><br/>
+          <select ref={cityInput} >
+              {cities.map((city)=> <option value={city.id}>{city.cityName}</option>)}
+          </select><br/>
+          <label>Добавить фото:<br/>  <input
             type="file"
             className="service-image-input"
             placeholder="Загрузите фото"
             ref={imageInput}
             multiple
-          />
+          /></label><br/>
           {/* input video */}
-          <input
+         <label>Добавить видео:<br/> <input
             type="file"
             className="service-video-input"
             placeholder="Загрузите видео"
             ref={videoInput}
             multiple
-          />
+          /></label> <br/>
           {/* input price */}
           <TextField
             required
@@ -145,7 +105,7 @@ function AddServiceForm(): JSX.Element {
             placeholder="Напишите стоимость"
             ref={priceInput}
             // value="qwerty"
-          />
+          /><br/>
           {/* input description */}
           <TextField
             required
@@ -154,8 +114,8 @@ function AddServiceForm(): JSX.Element {
             name="description"
             placeholder="Напишите описание товара.услуги"
             ref={descriptionInput}
-          />
-        </div>    
+          /><br/>
+       
         <button type="submit">Добавить</button>
       </form>
     </div>

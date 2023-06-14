@@ -9,7 +9,7 @@ function MyServiceList(): JSX.Element {
   const { myServices } = useSelector((store: RootState) => store.myServices);
   const { user } = useSelector((store: RootState) => store.auth);
   const dispatch = useAppDispatch();
-  console.log(myServices);
+ 
 
   useEffect(() => {
     dispatch(myServicesInit());

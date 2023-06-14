@@ -5,6 +5,7 @@ import servicesSlice from './components/servicesFoMee/servicesSlice/servicesSlic
 import countriesSlice from './components/myService/slice/countriesSlice ';
 import citiesSlice from './components/myService/slice/citiesSlice';
 import myServicesSlice from './components/myService/slice/myServicesSlice';
+import nameServicesSlice from './components/myService/slice/nameServicesSlice';
 
 // Слайсы - это отдельные модули нашего приложения. У каждого слайса - свой редьюсер.
 
@@ -16,6 +17,7 @@ const store = configureStore({
     myServices: myServicesSlice,
     allCities:citiesSlice,
     countries: countriesSlice,
+    nameServices:nameServicesSlice
   },
 });
 

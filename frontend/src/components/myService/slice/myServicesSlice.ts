@@ -28,7 +28,7 @@ const myServicesSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(serviceAdd.fulfilled, (state, action) => {
-        state.myServices = action.payload;
+        state.myServices = action.payload; /*возможно нужно push-ить*/
         state.error = '';
       })
       .addCase(serviceAdd.rejected, (state, action) => {

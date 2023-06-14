@@ -13,4 +13,12 @@ router.route('/').get(async (req, res) => {
   } catch (error) {}
 });
 
+router.route('/:coutryId').get(async (req, res) => {
+  const countryId = req.params.coutryId;
+  try {
+    const cities = await City.findAll({where:{country_id: countryId} });
+
+    res.json( cities );
+  } catch (error) {}
+});
 module.exports = router;
