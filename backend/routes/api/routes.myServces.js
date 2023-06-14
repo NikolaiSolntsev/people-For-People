@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { MyService, User, City, Service, Country } = require('../../db/models');
+const { MyService, User, City, Service, Country, PhotoMyService } = require('../../db/models');
+
 const fileuploadMiddeleware = require('../../middleware/fileuploadMiddeleware');
 // const myservice = require('../../db/models/myservice');
 
@@ -30,7 +31,7 @@ router.post('/', async (req, res) => {
  
   try {
     
-    const { image, video } = (req.files);
+    const { image } = (req.files);
     const { service, country, city, price, description} = (req.body);
     const arrImg = await Promise.all(
       image.map(async (el) => await fileuploadMiddeleware(el)),
@@ -39,6 +40,9 @@ router.post('/', async (req, res) => {
     const serviceAdd = await MyService.create({
       service_id:service, country, city_id:city, price, description, image: arrImg[0], seller_id: req.session.user.id,
     }); 
+    
+    const imag = image.map(async (el)=> {await PhotoMyService.create({title: description, myService_id:serviceAdd.id, img:el.name })})
+    
 
     res.status(201).json(serviceAdd);
   } catch (error) {

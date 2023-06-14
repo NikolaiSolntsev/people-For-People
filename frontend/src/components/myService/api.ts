@@ -15,7 +15,7 @@ export const getCountries = async (): Promise<Country[]> => {
   const data = await res.json();
   return data;
 };
-export const addServiceFetch = async (obj: FormData): Promise<MyService[]> => {
+export const addServiceFetch = async (obj: FormData): Promise<MyService> => {
   const res = await fetch('/api/myServices', {
     method: 'POST',
     body: obj,
