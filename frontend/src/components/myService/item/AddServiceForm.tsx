@@ -21,7 +21,7 @@ function AddServiceForm(): JSX.Element {
   const priceInput = useRef<HTMLInputElement>(null);
   const descriptionInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
-  console.log(nameServices,'===============================');
+  console.log(countries,'===============================');
 
   useEffect(()=>{
  dispatch(nameServicesInit())
