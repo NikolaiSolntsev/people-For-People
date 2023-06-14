@@ -4843,7 +4843,7 @@ const messagesOk = messages.filter(el => el.bayer_id === user.id )
 <h2>{`service: ${service.Service.serviceName}`}</h2>
 <h3>{`from user: ${service.User.name}`}</h3>
 <h5>{`price: ${service.price}`}</h5>
-
+<h5>{`description: ${service.description}`}</h5>
 <div>
     <h1>ваш чат с владельцем обЪявления:</h1>
 
