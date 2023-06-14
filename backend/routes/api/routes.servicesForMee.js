@@ -3,7 +3,7 @@ const { MyService, User, City, Service, MessChat } = require('../../db/models');
 
 router.route('/').get(async (req, res) => {
   try {
-    const mySevices = await MyService.findAll({
+    const myServices = await MyService.findAll({
       include: [
         { model: User },
         { model: City },
@@ -12,7 +12,7 @@ router.route('/').get(async (req, res) => {
         { model: MessChat },
       ],
     });
-    res.json({ mySevices });
+    res.json({ myServices });
   } catch (err) {
     res.json({ message: err.message });
   }
