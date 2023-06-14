@@ -6,7 +6,6 @@ import { userLogin } from '../authSlice/authSlice';
 
 
 function LogForm(): JSX.Element {
-  const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,7 +20,6 @@ function LogForm(): JSX.Element {
     if (phone && password) {
       dispatch(
         userLogin({
-          name,
           phone,
           password,
         })
@@ -36,15 +34,6 @@ function LogForm(): JSX.Element {
   return (
     <div>
       <form className='login-form' onSubmit={login}>
-        <label>
-          Введите Ваше имя:
-          <input
-            type='text'
-            name='name'
-            placeholder='Введите Ваше имя'
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
         <label>
           Введите номер вашего телефона:
           <input
