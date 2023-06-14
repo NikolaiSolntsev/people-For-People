@@ -7,18 +7,19 @@ import AccountChatMessage from "./AccountChatMessage";
 
 
 
-let messagesSet;
+let messages = [];
 
 socket.on('connect', () => {
     console.log('ws account')
   })
 
+ 
   socket.on('chat:incoming', (message) => {
-    if(message.for === 'saler') {
-        messagesSet(message.data)
-    }
-        })
 
+       messages = message.saler;
+       
+   
+        })
 
 
 function Account (){
@@ -27,23 +28,34 @@ const {user} = useSelector( (store) => store.auth);
 const {myServices} = useSelector( (store) => store.allServices);
 const services = myServices.filter(service => service.seller_id === user?.id)
 
-const [messages, setMessages] = useState([]);
-messagesSet = setMessages;
+
+const [draw, setDraw] = useState(true)
+//const [messages, setMessages] = useState([]);
 
 
+//messagesSet = setMessages;
+  
+
+useEffect( () => {
+  setInterval( () => {
+setDraw( (prev) => !prev)
+  },300)
+}, [])
 
 function getAccountChatMessages () {
 fetch(`/api/getAccountChatMessages/${user.id}`)
 .then(res => res.json())
 .then(data => {
-  messagesSet(data.messChats)
+
+messages = data.messChats
+ 
 })
 }
 
 
 useEffect( () => {
  user && getAccountChatMessages()
-}, [user])
+}, [ user])
 
 
 //????????
@@ -60,6 +72,7 @@ function addChatMessage(bayer_id, myService_id, text) {
   }
 
 
+
     return (
         <div>
 <h1>это ваш аккаунт. ниже услуги, которые вы готовы предоставлять.</h1>
@@ -68,5 +81,7 @@ function addChatMessage(bayer_id, myService_id, text) {
         </div>
     )
 }
+
+
 
 export default Account;
