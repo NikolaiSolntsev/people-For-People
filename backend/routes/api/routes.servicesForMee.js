@@ -18,6 +18,7 @@ router.route('/').get(async (req, res) => {
   }
 });
 
+
 router.post('/', async (req, res) => {
   try {
     const { image } = req.files;

@@ -16,7 +16,7 @@ const countriesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(countryInit.fulfilled, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload, '++++++++++++++++++++++++++++++++++++');
         state.countries = action.payload;
         state.error = '';
       })

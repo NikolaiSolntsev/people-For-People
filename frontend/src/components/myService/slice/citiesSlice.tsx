@@ -4,8 +4,9 @@ import { CityState } from '../type/CityState';
 
 const initialState: CityState = { cities: [], error: '' };
 
-export const citiesInit = createAsyncThunk('cities/init', () =>
-  api.getCities()
+export const citiesInit = createAsyncThunk('cities/init', (id:number) =>
+  // api.getCities(countryInput.id)
+  api.getCities(id)
 );
 
 const citiesSlice = createSlice({
@@ -15,7 +16,6 @@ const citiesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(citiesInit.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.cities = action.payload;
         state.error = '';
       })
