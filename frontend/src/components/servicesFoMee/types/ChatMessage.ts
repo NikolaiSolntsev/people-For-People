@@ -7,4 +7,5 @@ export type ChatMessage = {
     text: string;
     User: User;
     id: number;
+    createdAt: string;
 }
