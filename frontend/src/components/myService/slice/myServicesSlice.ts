@@ -5,9 +5,8 @@ import User from '../../user/type/User';
 
 const initialState: MyServicesState = { myServices: [], error: '' };
 
-export const myServicesInit = createAsyncThunk(
-  'myServices/init',
-  () => api.getMyServices()
+export const myServicesInit = createAsyncThunk('myServices/init', () =>
+  api.getMyServices()
 );
 
 export const serviceAdd = createAsyncThunk('myServices/add', (obj: FormData) =>
@@ -28,7 +27,7 @@ const myServicesSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(serviceAdd.fulfilled, (state, action) => {
-        state.myServices = action.payload; /*возможно нужно push-ить*/
+        state.myServices = [...state.myServices, action.payload];
         state.error = '';
       })
       .addCase(serviceAdd.rejected, (state, action) => {
