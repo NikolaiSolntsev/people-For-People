@@ -2,9 +2,8 @@ import React from 'react';
 import './Navibar.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
+import { Nav, Navbar, Button } from 'react-bootstrap';
+
 import { RootState, useAppDispatch } from '../../store';
 import { userLogout } from '../authentication/authSlice/authSlice';
 
@@ -18,6 +17,7 @@ function Navibar(): JSX.Element {
   return (
     <Navbar collapseOnSelect expand='lg' bg='light' variant='light'>
       <Navbar.Brand className='ml-7'>People for</Navbar.Brand>
+      <Navbar.Text>{user && `Привет ${user.name}!`}</Navbar.Text>
       <Navbar.Toggle aria-controls='responsive-navbar-nav' />
       <Navbar.Collapse className='justify-content-end'>
         <Nav className='mr-auto'>
@@ -26,7 +26,6 @@ function Navibar(): JSX.Element {
           </Nav.Link>
           {user?.id ? (
             <>
-              <div> {user && `Привет ${user.name}!`}</div>
               <Nav.Link>
                 <Link to='/profile'>Profile</Link>
               </Nav.Link>
@@ -38,7 +37,7 @@ function Navibar(): JSX.Element {
               </Nav.Link>
 
               <Button
-                variant='primary'
+                variant='light'
                 type='button'
                 onClick={logout}
                 className='mr-2'>
@@ -61,39 +60,6 @@ function Navibar(): JSX.Element {
       </Navbar.Collapse>
     </Navbar>
   );
-  /* <div className='links'>
-        {user?.id ? (
-          <>
-            <div> {user && `Привет ${user.name}!`}</div>
-            <div>
-              <Link to='/'>Home</Link>
-            </div>
-            <div>
-              <Link to='/profile'>Profile</Link>
-            </div>
-            <div>
-              <Link to='/servicesForMee'>My Services</Link>
-            </div>
-            <div>
-              <Link to={`/account/${user.id}`}>Account</Link>
-            </div>
-            <div>
-              <button type='button' onClick={logout}>
-                <Link to='/'>Logout</Link>
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <div>
-              <Link to='/login'>Sign in</Link>
-            </div>
-            <div>
-              <Link to='/registration'>Sign up</Link>
-            </div>
-          </>
-        )}
-      </div> */
 }
 
 export default Navibar;
