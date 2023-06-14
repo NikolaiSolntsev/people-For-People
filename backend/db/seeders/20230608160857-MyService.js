@@ -19,7 +19,7 @@ module.exports = {
         },
         {
           seller_id: 2,
-          service_id: 1,
+          service_id: 2,
           price: 30,
           description: 'Счастья, здоровья, мужа богатого',
           image:
