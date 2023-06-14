@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
 const message_chatBayer = await MessChat.findAll({where: {
     myService_id: message.text.myService_id,
     bayer_id: message.text.bayer_id,
-    saler_id: message.text.saler_id
+   // saler_id: message.text.saler_id  // ?????
 }, include: {model: User}})
 
 const arr = message_chatBayer.sort( (a, b ) => b.id - a.id )
