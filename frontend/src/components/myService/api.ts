@@ -21,6 +21,8 @@ export const addServiceFetch = async (obj: FormData): Promise<MyService[]> => {
     body: obj,
   });
   const data = await res.json();
+  console.log(data,')))))))))))))))))))))))))))))))');
+  
   return data;
 };
 

@@ -21,7 +21,7 @@ function AddServiceForm(): JSX.Element {
   const priceInput = useRef<HTMLInputElement>(null);
   const descriptionInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
-  console.log(countries,'===============================');
+  
 
   useEffect(()=>{
  dispatch(nameServicesInit())
@@ -33,6 +33,13 @@ function AddServiceForm(): JSX.Element {
 
    const addForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+   console.log(nameServicesInput.current?.value,'nameServicesInput.current');
+   console.log(countryInput.current?.value,'countryInput.current?.value');
+   console.log(cityInput.current?.value,'cityInput.current?.value');
+   console.log(imageInput.current?.files?.length,'imageInput.current?.files?.length');
+   console.log(videoInput.current?.files?.length,'videoInput.current?.files?.length');
+   console.log(priceInput.current?.value,'priceInput.current?.value');
+   console.log(descriptionInput.current?.value,'descriptionInput.current?.value');
    
     if (
       nameServicesInput.current?.value &&
@@ -97,7 +104,7 @@ function AddServiceForm(): JSX.Element {
             multiple
           /></label> <br/>
           {/* input price */}
-          <TextField
+          <input
             required
             id="outlined-required"
             type="text"
@@ -107,7 +114,7 @@ function AddServiceForm(): JSX.Element {
             // value="qwerty"
           /><br/>
           {/* input description */}
-          <TextField
+          <input
             required
             id="outlined-required"
             type="text"
