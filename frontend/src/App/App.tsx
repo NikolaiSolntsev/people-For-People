@@ -8,7 +8,7 @@ import { userCheck } from '../components/authentication/authSlice/authSlice';
 import { getAllServices } from '../components/servicesFoMee/servicesSlice/servicesSlice';
 import ServicesForMeeList from '../components/servicesFoMee/items/ServicesForMeeList';
 import AboutServiceForMee from '../components/servicesFoMee/items/AboutServiceForMee';
-import Profile from '../components/authentication/Profile/item/Profile';
+import Profile from '../components/account/item/Profile';
 import MyServiceList from '../components/myService/item/MyServiceList';
 import Account from '../components/account/items/Account';
 

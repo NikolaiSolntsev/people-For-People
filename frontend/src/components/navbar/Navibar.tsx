@@ -26,11 +26,11 @@ function Navibar(): JSX.Element {
           </Nav.Link>
           {user?.id ? (
             <>
-              <Nav.Link>
+              {/* <Nav.Link>
                 <Link to='/profile'>Profile</Link>
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link>
-                <Link to='/servicesForMee'>My Services</Link>
+                <Link to='/servicesForMee'>Services ALL</Link>
               </Nav.Link>
               <Nav.Link>
                 <Link to={`/account/${user.id}`}>Account</Link>
