@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const ssr = require('../../middleware/ssr');
+const fileUpload = require('express-fileupload');
 const sessionConfig = require('../sessionConfig/sessionConfig');
 
 
@@ -11,6 +12,7 @@ const serverConfig = (app) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..','..', 'public')));
+app.use(fileUpload());
 app.use(ssr);
 app.use(cookieParser());
 app.use(session(sessionConfig));

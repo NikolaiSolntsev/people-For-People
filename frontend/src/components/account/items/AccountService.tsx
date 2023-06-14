@@ -8,6 +8,7 @@ function AccountService ({service}: {service: MyService}): JSX.Element {
 
 
         <div style={{display: 'flex', flexDirection: 'column', width: '400px', height: '400px'}}>
+<img src={service.image} alt={service.description}/>
 <h1>{`location: ${service.City.cityName}`}</h1>
 <h2>{`service: ${service.Service.serviceName}`}</h2>
 <h3>{`from user: ${service.User.name}`}</h3>
