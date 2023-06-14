@@ -18,7 +18,7 @@ function MyServiceList(): JSX.Element {
   return (
     <div>
       <AddServiceForm />
-      <div className="serviceItems-card">
+      <div className="serviceItems-card" style={{display:'flex', flexWrap:'wrap', width:'100%'}}>
         {myServices.map((myService) => (
           <MyServiceItem key={myService.id} myService={myService} />
         ))}

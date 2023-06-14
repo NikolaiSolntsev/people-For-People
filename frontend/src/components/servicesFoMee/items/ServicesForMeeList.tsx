@@ -15,7 +15,7 @@ useEffect(()=>{
     dispatch(getAllServices())
 },[])
     return (
-        <div>
+        <div style={{display:'flex', width:'100%', flexWrap:'wrap'}}>
 {myServices.map(service => <ServiceForMeeItem key={service.id} service={service}/>)}
         </div>
     )
