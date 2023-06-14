@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Autocomplete, Box, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../store';
@@ -12,6 +12,7 @@ function AddServiceForm(): JSX.Element {
   const { countries } = useSelector((store: RootState) => store.countries);
   const { nameServices } = useSelector((store: RootState) => store.nameServices);
   const { cities } = useSelector((store: RootState) => store.allCities);
+  const {error}=useSelector((store: RootState) => store.myServices)
 
   const nameServicesInput = useRef<HTMLSelectElement>(null);
   const countryInput = useRef<HTMLSelectElement>(null);
@@ -31,7 +32,7 @@ function AddServiceForm(): JSX.Element {
   useEffect(() => {
     dispatch(countryInit());
   }, [ dispatch]);
- 
+  console.log('все заполнено!!!!!!!!!!!!!!!!!!!!!!!!!!',error,'!!!!!!');
 
    const addForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -45,6 +46,8 @@ function AddServiceForm(): JSX.Element {
       priceInput.current?.value &&
       descriptionInput.current?.value
     ) {
+      
+      
       const service = nameServicesInput.current.value;
       const country = countryInput.current.value;
       const city = cityInput.current.value;
@@ -66,6 +69,8 @@ function AddServiceForm(): JSX.Element {
 
       dispatch(serviceAdd(formData));
     }
+    
+    
   };
 
   return (
@@ -114,6 +119,7 @@ function AddServiceForm(): JSX.Element {
           /><br/>
        
         <button type="submit" >Добавить</button>
+        {error&&<><h5>Ошибка добавления! </h5><h5>Возможно не заполнены все поля</h5></>}
       </form>
     </div>
   );
