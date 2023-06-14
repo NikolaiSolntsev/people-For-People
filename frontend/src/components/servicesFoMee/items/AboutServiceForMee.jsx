@@ -4758,7 +4758,7 @@ import ChatMessageList from "./ChatMessageList";
   
 /////////////
 
-
+let hold = true;
 let messages = [];
 
 
@@ -4769,13 +4769,10 @@ socket.on('connect', () => {
 
 
 socket.on('chat:incoming', (message) => {
-  console.log('bayer', message)
-  // if(message.for === 'bayer') {
-  // 
 
   messages = message.bayer;
-  console.log(message.bayer)
-  // }
+  hold = false;
+
     })
 
 

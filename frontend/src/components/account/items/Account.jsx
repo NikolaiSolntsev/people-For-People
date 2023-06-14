@@ -15,11 +15,10 @@ socket.on('connect', () => {
 
  
   socket.on('chat:incoming', (message) => {
-    console.log(message)
-    //if(message.for === 'saler') {
-      
+
        messages = message.saler;
-    //}
+       
+   
         })
 
 
