@@ -15,7 +15,9 @@ router.route('/:serviceId/:buyerId').get(async (req, res) => {
     const deal = await Deal.findOne({
       where: { myService_id: serviceId, buyer_id: buyerId },
     });
-    deal ? res.json({ message: 'ok', deal }) : res.json({ message: 'not' });
+    deal && deal.status !== 'arhiv'
+      ? res.json({ message: 'ok', deal })
+      : res.json({ message: 'not' });
   } catch (error) {
     res.json({ message: error.message });
   }
@@ -39,7 +41,20 @@ router.route('/').post(async (req, res) => {
     res.json({ message: error.message });
   }
 });
-// .delete(async (req, res) => {
+
+router.route('/:dealId').put(async (req, res) => {
+  try {
+    const deal = await Deal.findOne({ where: { id: req.params.dealId } });
+
+    deal.status = req.body.status;
+    await deal.save();
+
+    res.json({ m: 'ok' });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+});
+// router.route('/').delete(async (req, res) => {
 //   const obj = await Deal.findAll();
 //   obj.forEach((element) => {
 //     element.destroy();

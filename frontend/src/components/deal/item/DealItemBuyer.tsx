@@ -2,7 +2,36 @@ import React from 'react';
 import { MyService } from '../../myService/type/MyService';
 import { Deal } from '../type/Deal';
 
-function DealItemBuyer({ deal }: { deal: Deal }): JSX.Element {
+function DealItemBuyer({
+  deal,
+  setByDeal,
+}: {
+  deal: Deal;
+  setByDeal: (value: any) => void;
+}): JSX.Element {
+  function dealStatus(arg: string): void {
+    if (arg === 'arhiv' && deal.status !== 'seller arhiv') {
+      arg = 'byuer arhiv';
+    }
+    fetch(`/api/deals/${deal.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ status: arg }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.m === 'ok' && (arg === 'arhiv' || arg === 'byuer arhiv')) {
+          setByDeal((prev: any) =>
+            prev.filter((el: Deal) => el.id !== deal.id)
+          );
+        } else if (data.m === 'ok') {
+          deal = { ...deal, status: arg };
+        }
+      });
+  }
+
   return (
     <div>
       <h2>{`Наименование услуги: ${deal.MyService.Service.serviceName}`}</h2>
@@ -17,12 +46,14 @@ function DealItemBuyer({ deal }: { deal: Deal }): JSX.Element {
           <button type='button'> Подтвердить получение услуги</button>
         </div>
       )}
-      {deal.status === 'reject' && (
+      {(deal.status === 'reject' || deal.status === 'seller arhiv') && (
         <div>
           <h3>
             Ваша сделка отклонена продовцом, для уточнения свяжитесь с продовцом
           </h3>
-          <button type='button'>В архив</button>
+          <button type='button' onClick={() => dealStatus('arhiv')}>
+            В архив
+          </button>
         </div>
       )}
       {deal.status === 'complete' && (

@@ -11,13 +11,17 @@ const {
 router.route('/').get(async (req, res) => {
   try {
     const { user } = req.session;
-    const byDeal = await Deal.findAll({
+    const byDealData = await Deal.findAll({
       where: { buyer_id: user.id },
       include: {
         model: MyService,
         include: [{ model: User }, { model: Service }],
       },
     });
+
+    const byDeal = byDealData.filter(
+      (el) => el.status !== 'arhiv' && el.status !== 'byuer arhiv'
+    );
 
     res.json({ byDeal });
   } catch (error) {
@@ -29,7 +33,7 @@ router.route('/seller').get(async (req, res) => {
   try {
     const { user } = req.session;
 
-    const seleDeal = await Deal.findAll({
+    const seleDealData = await Deal.findAll({
       where: { seller_id: user.id },
       include: [
         {
@@ -38,6 +42,10 @@ router.route('/seller').get(async (req, res) => {
         { model: MyService, include: { model: Service } },
       ],
     });
+
+    const seleDeal = seleDealData.filter(
+      (el) => el.status !== 'arhiv' && el.status !== 'seller arhiv'
+    );
 
     // const seleDeal = await Promise.all(
     //   seleDealData.map(async (el) => ({

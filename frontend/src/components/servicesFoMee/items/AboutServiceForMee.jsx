@@ -5189,7 +5189,7 @@ function AboutServiceForMee() {
   }
 
   function dealCreate() {
-    fetch(`/api/deals/`, {
+    fetch(`/api/deals`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
@@ -5231,6 +5231,9 @@ function AboutServiceForMee() {
 
   const messagesOk = messages.filter((el) => el.bayer_id === user.id);
 
+  if (deal && deal.status === 'arhiv') {
+    setDeal(undefined);
+  }
   return (
     <div>
       {service && (
@@ -5240,8 +5243,6 @@ function AboutServiceForMee() {
           <h3>{`from user: ${service.User.name}`}</h3>
           <h5>{`price: ${service.price}`}</h5>
           <h5>{`description: ${service.description}`}</h5>
-
-
           <div>
             {!deal && (
               <button type='button' onClick={dealCreate}>

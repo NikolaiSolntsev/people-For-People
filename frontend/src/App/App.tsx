@@ -24,12 +24,11 @@ function App(): JSX.Element {
   useEffect(() => {
     dispatch(userCheck());
     dispatch(getAllServices());
-    
   }, []);
 
-  // useEffect(() => {
-  //   fetch('/api/deals', { method: 'DELETE' });
-  // }, []);
+  //  useEffect(() => {
+  //     fetch('/api/deals', { method: 'DELETE' });
+  //   }, []);
 
   return (
     <div className='App'>
