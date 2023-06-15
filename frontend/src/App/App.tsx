@@ -24,6 +24,7 @@ function App(): JSX.Element {
   useEffect(() => {
     dispatch(userCheck());
     dispatch(getAllServices());
+    
   }, []);
 
   // useEffect(() => {

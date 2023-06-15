@@ -104,9 +104,9 @@ router.route('/registration').post(async (req, res) => {
 router.post('/login', async (req, res) => {
   // console.log(req.body);
   try {
-    const { name, phone, password } = req.body;
+    const { phone, password } = req.body;
 
-    if (!name || !phone || !password) {
+    if ( !phone || !password) {
       res.status(400).json({ message: 'Заполните все поля' });
       return;
     }

@@ -5239,6 +5239,8 @@ function AboutServiceForMee() {
           <h2>{`service: ${service.Service.serviceName}`}</h2>
           <h3>{`from user: ${service.User.name}`}</h3>
           <h5>{`price: ${service.price}`}</h5>
+          <h5>{`description: ${service.description}`}</h5>
+
 
           <div>
             {!deal && (
