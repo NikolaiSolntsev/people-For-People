@@ -28,19 +28,19 @@ function History(): JSX.Element {
         setSeleDeal(data.seleDeal);
       });
   }
-
+  console.log(seleDeal);
   return (
     <div className='histoty-box'>
       <div>
         <h1>Мои покупки</h1>
         {byDeal.map((el: Deal) => (
-          <DealItemBuyer key={el.id} deal={el} />
+          <DealItemBuyer key={el.id} deal={el} setByDeal={setByDeal} />
         ))}
       </div>
       <div>
         <h1>Мои продажи</h1>
         {seleDeal.map((el: Deal) => (
-          <DealItemSaller key={el.id} deal={el} />
+          <DealItemSaller key={el.id} deal={el} setSeleDeal={setSeleDeal} />
         ))}
       </div>
     </div>

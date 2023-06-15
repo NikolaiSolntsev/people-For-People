@@ -10,7 +10,7 @@ const storage = async (file) => {
 
   if (!allowedExtensions.test(extension)) throw 'Unsupported extension !';
 
-  if (size > 5000000) throw 'File must be less than 5MB';
+  if (size > 500000000000) throw 'File must be less than 5MB';
 
   const { md5 } = file;
 
