@@ -49,7 +49,9 @@ function App(): JSX.Element {
         />
         <Route path='/account/:user_id' element={<Account />} />
       </Routes>
+      <div className='footer'><footer>&copy; Production by Cyber-DEDki, 2023</footer></div>
     </div>
+          
   );
 }
 

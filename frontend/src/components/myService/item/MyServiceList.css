@@ -1,0 +1,15 @@
+
+
+.my-service-page {
+    background-color: #f3f3f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.serviceItems-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 90%;
+    flex-wrap: wrap;
+}

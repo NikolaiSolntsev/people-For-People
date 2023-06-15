@@ -1,48 +1,63 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { MyService } from '../type/MyService';
-import { useAppDispatch } from '../../../store';
-import { myServicesInit, serviceDel } from '../slice/myServicesSlice';
+import { RootState, useAppDispatch } from '../../../store';
+import { serviceDel } from '../slice/myServicesSlice';
+import './MyServiceItem.css';
 
 function MyServiceItem({ myService }: { myService: MyService }): JSX.Element {
+  const { user } = useSelector((store: RootState) => store.auth);
   const dispatch = useAppDispatch();
 
-
-
-  const delServiceItem = ():void => {
-    dispatch(serviceDel(myService.id))
-
-  // const editServiceItem = ():void => {
-  //   fetch(`/api/servicesForMee/${myService.id}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({}),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => dispatch(data));
-  // };
-
-  }
+  const delServiceItem = (): void => {
+    dispatch(serviceDel(myService.id));
+  };
   return (
-    <div
-      className="serviceItem-card"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '400px',
-        height: '400px',
-      }}
-    >
-      <img src={myService.image} alt="hallo" />
-      <h2>{`Описание: ${myService.description}`}</h2>
-      <h3>{`Стоимость: ${myService.price}`}</h3>
-      {/* <button type="button" onClick={editServiceItem}>
-        Редактировать
-      </button> */}
-      <button type="button" onClick={delServiceItem}>
-        Удалить
-      </button>
+    <div>
+      {user?.language === 'english' ? (
+        <div className="serviceItem-card">
+          <div className="serviceItem-card-details">
+            <div className="img-container">
+              <img
+                className="img-service"
+                src={myService.image}
+                alt="Picture none"
+              />
+            </div>
+            <h6>
+              Price:<h4>{myService.price}</h4>
+            </h6>
+            <h6>
+              Description: <h5>{myService.description}</h5>
+            </h6>
+          </div>
+          <button className="del-btn" type="button" onClick={delServiceItem}>
+            DELETE
+          </button>
+        </div>
+      ) : (
+        <div className="serviceItem-card">
+          <div className="serviceItem-card-details">
+            <div className="img-container">
+              <img
+                className="img-service"
+                src={myService.image}
+                alt="Изображения нет"
+              />
+            </div>
+
+            <h6>
+              Стоимость:<h4>{myService.price}</h4>
+            </h6>
+            <h6>
+              Описание: <h5>{myService.description}</h5>
+            </h6>
+          </div>
+          <button className="del-btn" type="button" onClick={delServiceItem}>
+            УДАЛИТЬ
+          </button>
+        </div>
+      )}
     </div>
   );
 }

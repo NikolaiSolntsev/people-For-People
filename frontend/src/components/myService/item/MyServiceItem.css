@@ -1,0 +1,58 @@
+.serviceItem-card {
+  width: 300px;
+  height: 500px;
+  background: #eeecec;
+  position: relative;
+  padding: 1.8rem;
+  transition: 0.5s ease-out;
+  overflow: visible;
+  margin-top: 30px;
+}
+
+.img-service {
+  max-width: 250px;
+  max-height: 350px;
+}
+.serviceItem-card-details {
+  color: black;
+  height: 100%;
+  gap: 0.5em;
+  display: grid;
+  place-content: center;
+}
+
+.del-btn {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  border: none;
+  background-color: rgb(169, 25, 25);
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+}
+
+.text-body {
+  color: rgb(134, 134, 134);
+}
+
+/*Text*/
+.text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/*Hover*/
+.serviceItem-card:hover {
+  border-color: #008bf8;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.serviceItem-card:hover .del-btn {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
