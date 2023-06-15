@@ -31,11 +31,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         onDelete: 'CASCADE',
       },
+      seller_id: {
+        type: DataTypes.INTEGER,
+      },
       sellerKey: {
         type: DataTypes.BOOLEAN,
       },
       buyerKey: {
         type: DataTypes.BOOLEAN,
+      },
+      status: {
+        type: DataTypes.TEXT,
       },
     },
     {
