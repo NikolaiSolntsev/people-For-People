@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './MyServiceList.css';
 import { useSelector } from 'react-redux';
 import MyServiceItem from './MyServiceItem';
 import { RootState, useAppDispatch } from '../../../store';
@@ -16,9 +17,10 @@ function MyServiceList(): JSX.Element {
   }, [user, dispatch]);
 
   return (
-    <div>
-      <AddServiceForm />
-      <div className="serviceItems-card" style={{display:'flex', flexWrap:'wrap', width:'100%'}}>
+    <div className='my-service-page'>
+      <div className='add-container'> <AddServiceForm /></div>
+     
+      <div className="serviceItems-container">
         {myServices.map((myService) => (
           <MyServiceItem key={myService.id} myService={myService} />
         ))}
