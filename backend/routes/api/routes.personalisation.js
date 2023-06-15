@@ -72,6 +72,7 @@ router.route('/registration').post(async (req, res) => {
     }
     const newUser = await User.create({
       name,
+      photo: 'https://www.pngmart.com/files/22/User-Avatar-Profile-PNG-Isolated-Pic.png',
       phone,
       password: hash,
       email,
@@ -81,6 +82,7 @@ router.route('/registration').post(async (req, res) => {
     req.session.user = {
       id: newUser.id,
       name: newUser.name,
+      photo: newUser.photo,
       phone: newUser.phone,
       email: newUser.email,
       language: newUser.language,

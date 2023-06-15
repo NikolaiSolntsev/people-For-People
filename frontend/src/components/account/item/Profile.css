@@ -1,26 +1,219 @@
-.profile{
-    display:flex;
-    flex-direction: column;
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.serv{
+
+/* .serv{
     border: none;
     background: none;
+} */
+.prof {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
-.prof{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+.buttonGroup {
+  align-self: flex-start;
 }
-.buttonGroup{
-    align-self: flex-start;
+.infoGroup {
+  width: 500px;
+  align-self: center;
+  margin-bottom: 30px;
+  margin-right: 50px;
 }
-.avatar{
-    width: 300px;
-    height: 400px;
+.avatar {
+  width: 300px;
+  height: 300px;
+  border: none;
+  border-radius: 50%;
+  overflow: hidden;
 }
-.ava img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.ava img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.icon {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.singup {
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  font-weight: bold;
+  font-size: x-large;
+  margin-top: 1.5em;
+}
+.formChange {
+  width: 50%;
+}
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 350px;
+  width: 100%;
+  flex-direction: column;
+  gap: 35px;
+  border-radius: 15px;
+  background: #e3e3e3;
+  box-shadow: 16px 16px 32px #c8c8c8, -16px -16px 32px #fefefe;
+  border-radius: 8px;
+}
 
+.inputBox,
+.inputBox1 {
+  position: relative;
+  max-width: 100%;
+}
+select {
+  width: 300px;
+}
+.inputBox input,
+.inputBox1 input,
+.inputBox select,
+.inputBox1 select {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  color: #000;
+  font-size: 1em;
+  background: transparent;
+  border-left: 2px solid #000;
+  border-bottom: 2px solid #000;
+  transition: 0.1s;
+  border-bottom-left-radius: 8px;
+}
+
+.inputBox span,
+.inputBox1 span {
+  margin-top: 5px;
+  position: absolute;
+  left: 0;
+  transform: translateY(-4px);
+  margin-left: 10px;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 12px;
+  color: #000;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 3px;
+  border-radius: 8px;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+  transform: translateX(113px) translateY(-15px);
+  font-size: 0.8em;
+  padding: 5px 10px;
+  background: #000;
+  letter-spacing: 0.2em;
+  color: #fff;
+  border: 2px;
+}
+
+.inputBox1 input:valid ~ span,
+.inputBox1 input:focus ~ span,
+.inputBox1 select:valid ~ span,
+.inputBox1 select:focus ~ span {
+  transform: translateX(156px) translateY(-15px);
+  font-size: 0.8em;
+  padding: 5px 10px;
+  background: #000;
+  letter-spacing: 0.2em;
+  color: #fff;
+  border: 2px;
+}
+
+.inputBox input:valid,
+.inputBox input:focus,
+.inputBox1 input:valid,
+.inputBox1 input:focus,
+.inputBox1 select:valid,
+.inputBox1 select:focus {
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.enter {
+  height: 45px;
+  width: 100px;
+  border-radius: 5px;
+  border: 2px solid #000;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.5s;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 3em;
+}
+
+.enter:hover {
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+.save-btn{
+  --color: #4f46e5;
+  padding: 0.8em 1.7em;
+  background-color: transparent;
+  border-radius: 0.3em;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1px solid;
+ 
+  font-family: inherit;
+  text-transform: uppercase;
+  color: var(--color);
+  z-index: 1;
+}
+
+.save-btn::before,
+.save-btn::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  background-color: var(--color);
+  transition: 1s ease;
+}
+
+.save-btn::before {
+  top: -1em;
+  left: -1em;
+}
+
+.save-btn::after {
+  left: calc(100% + 1em);
+  top: calc(100% + 1em);
+}
+
+.save-btn:hover::before,
+.save-btn:hover::after {
+  height: 410px;
+  width: 410px;
+}
+
+.save-btn:hover {
+    color:#fff;
+}
+
+.save-btn:active {
+  filter: brightness(0.8);
 }

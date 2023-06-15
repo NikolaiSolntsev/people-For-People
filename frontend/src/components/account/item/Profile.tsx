@@ -12,6 +12,9 @@ function Profile(): JSX.Element {
   const [name, setName] = useState(user?.name);
   const [email, setEmail] = useState(user?.email);
   const [photo, setPhoto] = useState(user?.photo);
+  const [form, setForm] = useState(false);
+  const dispatch = useAppDispatch();
+
 
   useEffect(() => {
     if (user) {
@@ -22,7 +25,6 @@ function Profile(): JSX.Element {
     }
   }, [user]);
 
-  const dispatch = useAppDispatch();
 
   const saveChange: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -38,79 +40,186 @@ function Profile(): JSX.Element {
     );
   };
 
+
   return (
-    <div className='profile'>
-      <h4>мои услуги</h4>
-      <div className='profile'>
-        <div>
-          <button className='serv' type='button'>
-            <Link to='/myServices'>добавить услугу</Link>
-          </button>
-        </div>
-        <div>
-          <button className='serv' type='button'>
-            <Link to='/history'>история заказов</Link>
-          </button>
-        </div>
-      </div>
+    <div>
+      {user?.language === 'русский' ? (
+        <>
+          <h4>Ваш профиль</h4>
+          <div className="profile">
+            <div className="icon">
+              <div className="avatar ava">
+                <img src={user?.photo} alt="img" />
+              </div>
+              <div className="infoGroup">
+                <div>
+                  <h5>твои баллы: {user?.score}</h5>
+                </div>
+                <div>
+                  <h5>твой телефон: {user?.phone}</h5>
+                </div>
+              </div>
 
-      <form onSubmit={saveChange} className='formDiv'>
-        <div>
-          <img src={user?.photo} alt='img' />
-        </div>
-        <div>твои баллы: {user?.score}</div>
-        <div> your phone: {user?.phone}</div>
-        <br />
-        <br />
-        <div className='changeForm'>
-          <h5>изменить:</h5>
-          <label>
-            name
-            <input
-              // placeholder={user?.name}
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
-          </label>
-          <br />
-          <label>
-            photo
-            <input
-              // placeholder={user?.photo}
-              onChange={(e) => setPhoto(e.target.value)}
-              value={photo}
-            />
-          </label>
-          <br />
-          <label>
-            email
-            <input
-              // placeholder={user?.email}
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </label>
-          <div> language: {user?.language} </div>
-          <InputLabel id='demo-simple-select-required-label'>
-            изменить язык
-          </InputLabel>
-          <Select
-            labelId='demo-simple-select-required-label'
-            id='demo-simple-select-required'
-            value={language}
-            label='Выберите язык *'
-            onChange={(e) => setLanguage(e.target.value)}>
-            <MenuItem value=''>
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value='русский'>русский</MenuItem>
-            <MenuItem value='english'>english</MenuItem>
-          </Select>
-          <br />
+              <div className="buttonGroup">
+                <div>
+                  <button className="btn" type="button">
+                    <Link to="/myServices">добавить услугу</Link>
+                  </button>
+                </div>
+                <div>
+                  <button className=" btn" type="button">
+                    <Link to="/history">история заказов</Link>
+                  </button>
+                </div>
+              </div>
+            </div>
+            {!form && (
+              <button
+                className="save-btn"
+                type="button"
+                onClick={() => setForm(true)}
+              >
+                изменить профиль
+              </button>
+            )}
+            {form && (
+              <>
+                {' '}
+                <form className="form " onSubmit={saveChange}>
+                  <p className="form-title">изменить профиль</p>
+                  <div className="input-container">
+                    <input
+                      type="text"
+                      onChange={(e) => setName(e.target.value)}
+                      value={name}
+                    />
+                  </div>
+                  <div className="input-container">
+                    <input
+                      type="text"
+                      onChange={(e) => setPhoto(e.target.value)}
+                      value={photo}
+                    />
+                  </div>
+                  <div className="input-container">
+                    <input
+                      type="text"
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
+                    />
+                  </div>
 
-          <button type='submit'>save</button>
-        </div>
-      </form>
+                  <div className="input-container">
+                    <select
+                      className="select-container"
+                      onChange={(e) => setLanguage(e.target.value)}
+                      value={language}
+                    >
+                      <option value="none"> </option>
+                      <option className="option" value="english">
+                        english{' '}
+                      </option>
+                      <option value="русский">русский </option>
+                    </select>
+                  </div>
+                  <button type="submit" className="save-btn">
+                    сохранить
+                  </button> <button onClick={()=>setForm(false)} type="button" className="save-btn">
+                    закрыть
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <h3>your profile</h3>
+          <div className="profile">
+            <div className="icon">
+              <div className="avatar ava">
+                <img src={user?.photo} alt="img" />
+              </div>
+              <div className="infoGroup">
+                <div>
+                  <h5>your score: {user?.score}</h5>
+                </div>
+                <div>
+                  <h5>your phone number: {user?.phone}</h5>
+                </div>
+              </div>
+
+              <div className="buttonGroup">
+                <div>
+                  <button className="btn" type="button">
+                    <Link to="/myServices">add service</Link>
+                  </button>
+                </div>
+                <div>
+                  <button className="btn" type="button">
+                    <Link to="/history">history of dial</Link>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {!form && (
+              <button
+                className="save-btn"
+                type="button"
+                onClick={() => setForm(true)}
+              >
+                change profile
+              </button>
+            )}
+            {form && (
+              <form className="form " onSubmit={saveChange}>
+                <p className="form-title">change profile </p>
+                <div className="input-container">
+                  <input
+                    type="text"
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                  />
+                </div>
+                <div className="input-container">
+                  <input
+                    type="text"
+                    onChange={(e) => setPhoto(e.target.value)}
+                    value={photo}
+                  />
+                </div>
+                <div className="input-container">
+                  <input
+                    type="text"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                  />
+                </div>
+
+                <div className="input-container">
+                  <select
+                    className="select-container"
+                    onChange={(e) => setLanguage(e.target.value)}
+                    value={language}
+                  >
+                    <option value="none"> </option>
+                    <option className="option" value="english">
+                      english{' '}
+                    </option>
+                    <option value="русский">русский </option>
+                  </select>
+                </div>
+                <button type="submit" className="save-btn">
+                  Save
+                </button> <button onClick={()=>setForm(false)} type="button" className="save-btn">
+                    Close
+                  </button>
+              </form>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

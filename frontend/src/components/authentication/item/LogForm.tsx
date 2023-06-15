@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../store';
 import { userLogin } from '../authSlice/authSlice';
+import './LogForm.css'
+import { Nav } from 'react-bootstrap';
 
 
 function LogForm(): JSX.Element {
@@ -32,28 +34,29 @@ function LogForm(): JSX.Element {
   }
 
   return (
-    <div>
-      <form className='login-form' onSubmit={login}>
-        <label>
-          Введите номер вашего телефона:
-          <input
-            type='text'
-            name='phone'
-            placeholder='Введите номер Вашего телефона'
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </label>
-        <label>
-          Введите пароль:
-          <input
-            type='password'
-            name='password'
-            placeholder='Введите пароль'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type='submit'>Войти</button>
-      </form>
+    <div className='login-form back'>   
+    <form className="form " onSubmit={login}>
+       <p className="form-title">Sign in to your account</p>
+        <div className="input-container">
+          <input type="float"  name='phone' placeholder="Enter phone"  onChange={(e) => setPhone(e.target.value)}/>
+          <span/>
+          
+      </div>
+      <div className="input-container">
+          <input type="password" placeholder="Enter password"  name='password'  onChange={(e) => setPassword(e.target.value)}/>
+        </div>
+         <button type="submit" className="submit">
+        Sign in
+      </button>
+
+      <p className="signup-link">
+        No account?
+        <Nav.Link>
+                <Link to='/registration'>Sign up</Link>
+              </Nav.Link>
+      </p>
+   </form>
+
       <h2>{error}</h2>
     </div>
   );

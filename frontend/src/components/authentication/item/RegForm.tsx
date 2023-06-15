@@ -6,9 +6,11 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RootState, useAppDispatch } from '../../../store';
 import { userRegistration } from '../authSlice/authSlice';
+import { Nav } from 'react-bootstrap';
+import './LogForm.css'
 
 function RegForm(): JSX.Element {
   const [name, setName] = useState('');
@@ -43,62 +45,47 @@ function RegForm(): JSX.Element {
   }
 
   return (
-    <div className="reg-form">
-      <form onSubmit={registration}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Введите ваше имя"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Введите номер Вашего телефона"
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <input
+    <div className="reg-form back">
+     
+      <form className="form " onSubmit={registration}>
+       <p className="form-title">Sign up </p>
+        <div className="input-container">
+          <input type="text"  name='name' placeholder="Enter name"  onChange={(e) => setName(e.target.value)}/>
+          <span/>
+          
+      </div>
+        <div className="input-container">
+          <input type="float"  name='phone' placeholder="Enter phone"  onChange={(e) => setPhone(e.target.value)}/>
+          <span/>
+          
+      </div>
+      <div className="input-container">
+          <input type="password" placeholder="Enter password"  name='password'  onChange={(e) => setPassword(e.target.value)}/>
+        </div>
+      <div className="input-container">
+          <input type="password" placeholder="Repeat password"  name='repeatPassword' onChange={(e) => setRepeatPassword(e.target.value)}/>
+        </div>
+      <div className="input-container">
+          <input type="email" placeholder="Enter email"  name='email'  onChange={(e) => setEmail(e.target.value)}/>
+        </div>
+      <div className="input-container">
+          <select className="select-container" value={language} placeholder="Choise language"    onChange={(e) => setLanguage(e.target.value)}>
+            <option value="none"> </option>
+            <option className='option' value="english">english </option>
+            <option value="русский">русский </option>
+          </select>
+        </div>
+         <button type="submit" className="submit">
+        Sign up
+      </button>
 
-          type="password"
-
-          name="password"
-          placeholder="Введите пароль"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-
-          type="password"
-
-          name="repeatPassword"
-          placeholder="Введите еще раз"
-          onChange={(e) => setRepeatPassword(e.target.value)}
-        />
-        <input
-          type="text"
-          name="email"
-          placeholder="Введите адрес электронной почты"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <InputLabel id="demo-simple-select-required-label">
-          Выберите язык
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-required-label"
-          id="demo-simple-select-required"
-          value={language}
-          label="Выберите язык *"
-          onChange={(e) => setLanguage(e.target.value)}
-        >
-          <MenuItem value="">
-
-            <em>Выберите язык</em>
-
-          </MenuItem>
-          <MenuItem value="русский">русский</MenuItem>
-          <MenuItem value="english">english</MenuItem>
-        </Select>
-        <button type="submit">Зарегистрироваться</button>
-      </form>
+      <p className="signin-link">
+        Has you account?
+        <Nav.Link>
+                <Link to='/login'>Sign in</Link>
+              </Nav.Link>
+      </p>
+   </form>
       <h2>{error}</h2>
     </div>
   );
