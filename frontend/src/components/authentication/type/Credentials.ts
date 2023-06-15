@@ -2,6 +2,7 @@ export type User = {
   id?: number;
   name?: string;
   password?: string;
+  repeatPassword?:string;
   email?: string;
   language?: string;
   phone?: string;

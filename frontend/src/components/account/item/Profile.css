@@ -2,12 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+
+}
+.saveBTN{
+ margin-left: 10px;
+  margin-top: 20px;
 }
 
-/* .serv{
-    border: none;
-    background: none;
-} */
 .prof {
   display: flex;
   align-items: center;
@@ -15,12 +17,17 @@
 }
 .buttonGroup {
   align-self: flex-start;
+  border: 1px solid #4f46e5;
+  border-radius: 0.3em;
+
+
 }
 .infoGroup {
   width: 500px;
   align-self: center;
   margin-bottom: 30px;
   margin-right: 50px;
+  
 }
 .avatar {
   width: 300px;

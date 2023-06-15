@@ -19,15 +19,15 @@ function Navibar(): JSX.Element {
     
       {user?.language === 'русский' ? (
         <>
-          <Navbar.Brand className="ml-7">People for</Navbar.Brand>
+          <Navbar.Brand className="ml-7"><h2>People for</h2> People</Navbar.Brand>
           <Navbar.Text>
-            <h4>{user && `Привет ${user.name}!`}</h4>
+            <h4>{user && `Вы вошли как  ${user.name}`}</h4>
           </Navbar.Text>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse className="justify-content-end">
             <Nav className="mr-auto">
               <Nav.Link>
-                <Link to="/">На главную</Link>
+                <Link to="/"><h4>На главную</h4></Link>
               </Nav.Link>
               {user?.id ? (
                 <>
@@ -35,10 +35,10 @@ function Navibar(): JSX.Element {
                 <Link to='/profile'>Profile</Link>
               </Nav.Link> */}
                   <Nav.Link>
-                    <Link to="/servicesForMee">Все услуги</Link>
+                    <Link to="/servicesForMee"><h4>Все услуги</h4></Link>
                   </Nav.Link>
                   <Nav.Link>
-                    <Link to={`/account/${user.id}`}>Профиль</Link>
+                    <Link to={`/account/${user.id}`}><h4>Профиль</h4></Link>
                   </Nav.Link>
 
                   <Button
@@ -47,18 +47,18 @@ function Navibar(): JSX.Element {
                     onClick={logout}
                     className="mr-2"
                   >
-                    <Link to="/">Выход</Link>
+                    <Link to="/"><h4>Выход</h4></Link>
                   </Button>
                 </>
               ) : (
                 <>
                   <Nav.Link>
                     <Link className="" to="/login">
-                      Войти
+                    <h4>Войти</h4>
                     </Link>
                   </Nav.Link>
                   <Nav.Link>
-                    <Link to="/registration">Зарегистрироваться</Link>
+                    <Link to="/registration"><h4>Зарегистрироваться</h4></Link>
                   </Nav.Link>
                 </>
               )}
@@ -68,15 +68,15 @@ function Navibar(): JSX.Element {
       ) : (
         <>
           {' '}
-          <Navbar.Brand className="ml-7">People for</Navbar.Brand>
+          <Navbar.Brand className="ml-7"><h2>People for</h2> People</Navbar.Brand>
           <Navbar.Text>
-            <h4>{user && `Hello ${user.name}!`}</h4>
+            <h4>{user && `You are logged in as ${user.name}`}</h4>
           </Navbar.Text>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse className="justify-content-end">
             <Nav className="mr-auto">
               <Nav.Link>
-                <Link to="/">Home</Link>
+                <Link to="/"><h4>Home</h4></Link>
               </Nav.Link>
               {user?.id ? (
                 <>
@@ -84,10 +84,10 @@ function Navibar(): JSX.Element {
                 <Link to='/profile'>Profile</Link>
               </Nav.Link> */}
                   <Nav.Link>
-                    <Link to="/servicesForMee">Services ALL</Link>
+                    <Link to="/servicesForMee"><h4>Services ALL</h4></Link>
                   </Nav.Link>
                   <Nav.Link>
-                    <Link to={`/account/${user.id}`}>Account</Link>
+                    <Link to={`/account/${user.id}`}><h4>Account</h4></Link>
                   </Nav.Link>
 
                   <Button
@@ -96,7 +96,7 @@ function Navibar(): JSX.Element {
                     onClick={logout}
                     className="mr-2"
                   >
-                    <Link to="/">Logout</Link>
+                    <Link to="/"><h4>Logout</h4></Link>
                   </Button>
                 </>
               ) : (
@@ -107,7 +107,7 @@ function Navibar(): JSX.Element {
                     </Link>
                   </Nav.Link>
                   <Nav.Link>
-                    <Link to="/registration">Sign up</Link>
+                    <Link to="/registration"><h4>Sign up</h4></Link>
                   </Nav.Link>
                 </>
               )}
