@@ -28,17 +28,18 @@ function RegForm(): JSX.Element {
   const registration: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    if (password === repeatPassword) {
+    // if (password === repeatPassword) {
       dispatch(
         userRegistration({
           name,
           phone,
           password,
+          repeatPassword,
           email,
           language,
         })
       );
-    }
+    // }
   };
   if (user) {
     navigate('/');

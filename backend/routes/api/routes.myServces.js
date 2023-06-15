@@ -79,22 +79,22 @@ router.post('/urlFoto', async (req, res) => {
   );
   res.json(arrImg);
 });
-router.route('/:id').delete(async (req, res) => {
-  try {
-    const myServicesDel = await MyService.destroy({
-      where: { id: req.params.id },
-    });
-    if (myServicesDel) {
-      res.status(200).json(Number(req.params.id));
-    }else {
-      res
-        .status(400)
-        .json({ message: 'сервер временно не работает'});
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
-  }
-});
+// router.route('/:id').delete(async (req, res) => {
+//   try {
+//     const myServicesDel = await MyService.destroy({
+//       where: { id: req.params.id },
+//     });
+//     if (myServicesDel) {
+//       res.status(200).json(Number(req.params.id));
+//     }else {
+//       res
+//         .status(400)
+//         .json({ message: 'сервер временно не работает'});
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 module.exports = router;

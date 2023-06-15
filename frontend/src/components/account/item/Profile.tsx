@@ -40,48 +40,50 @@ function Profile(): JSX.Element {
     );
   };
 
-
   return (
     <div>
       {user?.language === 'русский' ? (
         <>
-          <h4>Ваш профиль</h4>
-          <div className="profile">
-            <div className="icon">
+          <h1>Ваш профиль</h1>
+                    <div className="profile">
+            <div className="icon"><div>
               <div className="avatar ava">
                 <img src={user?.photo} alt="img" />
               </div>
-              <div className="infoGroup">
-                <div>
-                  <h5>твои баллы: {user?.score}</h5>
-                </div>
-                <div>
-                  <h5>твой телефон: {user?.phone}</h5>
-                </div>
-              </div>
-
-              <div className="buttonGroup">
-                <div>
-                  <button className="btn" type="button">
-                    <Link to="/myServices">добавить услугу</Link>
-                  </button>
-                </div>
-                <div>
-                  <button className=" btn" type="button">
-                    <Link to="/history">история заказов</Link>
-                  </button>
-                </div>
-              </div>
-            </div>
-            {!form && (
+              {!form && (
               <button
-                className="save-btn"
+                className="save-btn saveBTN"
                 type="button"
                 onClick={() => setForm(true)}
               >
                 изменить профиль
               </button>
             )}
+            </div>
+              <div className="infoGroup">
+                <div>
+                  <h3>твои баллы: {user?.score}</h3>
+                </div>
+                <div>
+                  <h3>твой телефон: {user?.phone}</h3>
+                </div>
+                <div className="buttonGroup">
+                <div>
+                  <button className="btn" type="button">
+                    <Link to="/myServices"><h3>добавить услугу</h3></Link>
+                  </button>
+                </div>
+                <div>
+                  <button className=" btn" type="button">
+                    <Link to="/history"><h3>история заказов</h3></Link>
+                  </button>
+                </div>
+              </div>
+              </div>
+
+              
+            </div>
+           
             {form && (
               <>
                 {' '}
@@ -134,88 +136,93 @@ function Profile(): JSX.Element {
         </>
       ) : (
         <>
-          <h3>your profile</h3>
-          <div className="profile">
-            <div className="icon">
+          <h1>Your Profile</h1>
+                    <div className="profile">
+            <div className="icon"><div>
               <div className="avatar ava">
                 <img src={user?.photo} alt="img" />
               </div>
-              <div className="infoGroup">
-                <div>
-                  <h5>your score: {user?.score}</h5>
-                </div>
-                <div>
-                  <h5>your phone number: {user?.phone}</h5>
-                </div>
-              </div>
-
-              <div className="buttonGroup">
-                <div>
-                  <button className="btn" type="button">
-                    <Link to="/myServices">add service</Link>
-                  </button>
-                </div>
-                <div>
-                  <button className="btn" type="button">
-                    <Link to="/history">history of dial</Link>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {!form && (
+              {!form && (
               <button
-                className="save-btn"
+                className="save-btn saveBTN"
                 type="button"
                 onClick={() => setForm(true)}
               >
-                change profile
+               change profile
               </button>
             )}
-            {form && (
-              <form className="form " onSubmit={saveChange}>
-                <p className="form-title">change profile </p>
-                <div className="input-container">
-                  <input
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                  />
+            </div>
+              <div className="infoGroup">
+                <div>
+                  <h3>your points: {user?.score}</h3>
                 </div>
-                <div className="input-container">
-                  <input
-                    type="text"
-                    onChange={(e) => setPhoto(e.target.value)}
-                    value={photo}
-                  />
+                <div>
+                  <h3> your phone number: {user?.phone}</h3>
                 </div>
-                <div className="input-container">
-                  <input
-                    type="text"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                  />
-                </div>
-
-                <div className="input-container">
-                  <select
-                    className="select-container"
-                    onChange={(e) => setLanguage(e.target.value)}
-                    value={language}
-                  >
-                    <option value="none"> </option>
-                    <option className="option" value="english">
-                      english{' '}
-                    </option>
-                    <option value="русский">русский </option>
-                  </select>
-                </div>
-                <button type="submit" className="save-btn">
-                  Save
-                </button> <button onClick={()=>setForm(false)} type="button" className="save-btn">
-                    Close
+                <div className="buttonGroup">
+                <div>
+                  <button className="btn" type="button">
+                    <Link to="/myServices"><h3>add a service</h3></Link>
                   </button>
-              </form>
+                </div>
+                <div>
+                  <button className=" btn" type="button">
+                    <Link to="/history"><h3>history of orders</h3></Link>
+                  </button>
+                </div>
+              </div>
+              </div>
+
+              
+            </div>
+           
+            {form && (
+              <>
+                {' '}
+                <form className="form " onSubmit={saveChange}>
+                  <p className="form-title">change profile</p>
+                  <div className="input-container">
+                    <input
+                      type="text"
+                      onChange={(e) => setName(e.target.value)}
+                      value={name}
+                    />
+                  </div>
+                  <div className="input-container">
+                    <input
+                      type="text"
+                      onChange={(e) => setPhoto(e.target.value)}
+                      value={photo}
+                    />
+                  </div>
+                  <div className="input-container">
+                    <input
+                      type="text"
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
+                    />
+                  </div>
+
+                  <div className="input-container">
+                    <select
+                      className="select-container"
+                      onChange={(e) => setLanguage(e.target.value)}
+                      value={language}
+                    >
+                      <option value="none"> </option>
+                      <option className="option" value="english">
+                        english{' '}
+                      </option>
+                      <option value="русский">русский </option>
+                    </select>
+                  </div>
+                  <button type="submit" className="save-btn">
+                    save
+                  </button> <button onClick={()=>setForm(false)} type="button" className="save-btn">
+                    close
+                  </button>
+                </form>
+              </>
             )}
           </div>
         </>

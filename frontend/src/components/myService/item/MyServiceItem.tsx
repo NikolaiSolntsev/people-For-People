@@ -28,12 +28,10 @@ function MyServiceItem({ myService }: { myService: MyService }): JSX.Element {
               Price:<h4>{myService.price}</h4>
             </h6>
             <h6>
-              Description: <h5>{myService.description}</h5>
+              Description:<h5>{myService.description}</h5>
             </h6>
           </div>
-          <button className="del-btn" type="button" onClick={delServiceItem}>
-            DELETE
-          </button>
+          
         </div>
       ) : (
         <div className="serviceItem-card">
