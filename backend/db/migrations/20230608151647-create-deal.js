@@ -25,11 +25,17 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
+      seller_id: {
+        type: Sequelize.INTEGER,
+      },
       sellerKey: {
         type: Sequelize.BOOLEAN,
       },
       buyerKey: {
         type: Sequelize.BOOLEAN,
+      },
+      status: {
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,

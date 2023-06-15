@@ -15,6 +15,7 @@ import Account from '../components/account/items/Account';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { useAppDispatch } from '../store';
+import History from '../components/history/item/History';
 // import Slider from '../components/slider/Slider';
 
 function App(): JSX.Element {
@@ -25,12 +26,17 @@ function App(): JSX.Element {
     dispatch(getAllServices());
   }, []);
 
+  // useEffect(() => {
+  //   fetch('/api/deals', { method: 'DELETE' });
+  // }, []);
+
   return (
     <div className='App'>
       <Navibar />
       {/* <Slider /> */}
 
       <Routes>
+        <Route path='/history' element={<History />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/myServices' element={<MyServiceList />} />
         <Route path='/registration' element={<RegForm />} />
