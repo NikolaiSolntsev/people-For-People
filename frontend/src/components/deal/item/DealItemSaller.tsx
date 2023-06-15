@@ -39,12 +39,24 @@ function DealItemSaller({
         }
       });
   }
+  console.log(deal, 'Selleeeerrrrrrrrr');
 
   return (
     <div>
       <h2>{`Наименование услуги: ${deal.MyService.Service.serviceName}`}</h2>
       <h3>{`От покупателя: ${deal.User?.name}`}</h3>
       <h3>{`Сумма сделки ${deal.MyService.price}`}</h3>
+      {deal.status === 'right' && !deal.buyerKey && (
+        <div>
+          <h3>Ожидание подтверждения получения услуги от покупателя</h3>
+        </div>
+      )}
+      {(deal.status === 'right' || deal.status === 'byuer arhiv') &&
+        deal.buyerKey && (
+          <div>
+            <h3>Покупатель подтвердил получение услуги</h3>
+          </div>
+        )}
       {deal.status === 'create' && (
         <div>
           <h3>Покупатель ожидает подтверждения сделки</h3>
@@ -57,12 +69,17 @@ function DealItemSaller({
           </button>
         </div>
       )}
-      {deal.status === 'reject' && (
+      {(deal.status === 'reject' ||
+        deal.buyerKey ||
+        deal.status === 'byuer arhiv') && (
         <div>
-          <h3>Покупка отклонена</h3>
+          {!deal.buyerKey &&
+            (deal.status === 'reject' || deal.status === 'byuer arhiv') && (
+              <h3>Покупка отклонена</h3>
+            )}
           <button type='button' onClick={() => dealStatus('arhiv')}>
             {' '}
-            Отправить в архив
+            В архив
           </button>
         </div>
       )}

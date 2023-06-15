@@ -5246,7 +5246,7 @@ function AboutServiceForMee() {
           <div>
             {!deal && (
               <button type='button' onClick={dealCreate}>
-                Заказать эту улугу
+                Заказать эту уcлугу
               </button>
             )}
             {deal && (

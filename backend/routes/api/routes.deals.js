@@ -54,6 +54,7 @@ router.route('/:dealId').put(async (req, res) => {
     res.json({ message: error.message });
   }
 });
+
 // router.route('/').delete(async (req, res) => {
 //   const obj = await Deal.findAll();
 //   obj.forEach((element) => {
@@ -62,4 +63,17 @@ router.route('/:dealId').put(async (req, res) => {
 //   res.json({ m: 'ok' });
 // });
 
+router.route(`/confirm/by/:dealId`).put(async (req, res) => {
+  try {
+    const deal = await Deal.findOne({ where: { id: req.params.dealId } });
+
+    deal.buyerKey = req.body.buyerKey;
+
+    await deal.save();
+
+    res.json({ m: 'ok' });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+});
 module.exports = router;

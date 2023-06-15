@@ -26,9 +26,9 @@ function App(): JSX.Element {
     dispatch(getAllServices());
   }, []);
 
-  //  useEffect(() => {
-  //     fetch('/api/deals', { method: 'DELETE' });
-  //   }, []);
+  // useEffect(() => {
+  //   fetch('/api/deals', { method: 'DELETE' });
+  // }, []);
 
   return (
     <div className='App'>
