@@ -1,3 +1,4 @@
+
 :link {
   text-decoration: none;
 }
@@ -30,4 +31,12 @@
   width: 70px;
   height: 70px;
   object-fit: cover;
+}
+.h {
+  color:black;
+  margin-right: 4rem;
+}
+.l{
+  color:black;
+  margin-left: 3rem;
 }

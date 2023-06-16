@@ -16,7 +16,7 @@ function Navibar(): JSX.Element {
   };
 
   return (
-    <Navbar collapseOnSelect expand='lg' variant='light'>
+    <Navbar collapseOnSelect bg-transparent expand='lg'  variant='light'>
       {user?.language === 'русский' ? (
         <>
           <Navbar.Brand className='ml-7'>
@@ -25,13 +25,13 @@ function Navibar(): JSX.Element {
             </div>
           </Navbar.Brand>
           <Navbar.Text>
-            <h4>{user && `Вы вошли как  ${user.name}`}</h4>
+            <h4 className='l'>{user && `Вы вошли как  ${user.name}`}</h4>
           </Navbar.Text>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse className='justify-content-end'>
             <Nav className='mr-auto'>
               <Nav.Link>
-                <Link to='/'>
+                <Link className='h' to='/'>
                   <h4>На главную</h4>
                 </Link>
               </Nav.Link>
@@ -41,12 +41,12 @@ function Navibar(): JSX.Element {
                 <Link to='/profile'>Profile</Link>
               </Nav.Link> */}
                   <Nav.Link>
-                    <Link to='/servicesForMee'>
+                    <Link className='h' to='/servicesForMee'>
                       <h4>Все услуги</h4>
                     </Link>
                   </Nav.Link>
                   <Nav.Link>
-                    <Link to={`/account/${user.id}`}>
+                    <Link className='h' to={`/account/${user.id}`}>
                       <h4>Профиль</h4>
                     </Link>
                   </Nav.Link>
@@ -56,7 +56,7 @@ function Navibar(): JSX.Element {
                     type='button'
                     onClick={logout}
                     className='mr-2'>
-                    <Link to='/'>
+                    <Link className='h' to='/'>
                       <h4>Выход</h4>
                     </Link>
                   </Button>
@@ -64,12 +64,12 @@ function Navibar(): JSX.Element {
               ) : (
                 <>
                   <Nav.Link>
-                    <Link className='' to='/login'>
+                    <Link className='h' to='/login'>
                       <h4>Войти</h4>
                     </Link>
                   </Nav.Link>
                   <Nav.Link>
-                    <Link to='/registration'>
+                    <Link className='h' to='/registration'>
                       <h4>Зарегистрироваться</h4>
                     </Link>
                   </Nav.Link>
@@ -87,13 +87,13 @@ function Navibar(): JSX.Element {
             </div>
           </Navbar.Brand>
           <Navbar.Text>
-            <h4>{user && `You are logged in as ${user.name}`}</h4>
+            <h4 className='l'>{user && `You are logged in as ${user.name}`}</h4>
           </Navbar.Text>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse className='justify-content-end'>
             <Nav className='mr-auto'>
               <Nav.Link>
-                <Link to='/'>
+                <Link className='h' to='/'>
                   <h4>Home</h4>
                 </Link>
               </Nav.Link>
@@ -103,12 +103,12 @@ function Navibar(): JSX.Element {
                 <Link to='/profile'>Profile</Link>
               </Nav.Link> */}
                   <Nav.Link>
-                    <Link to='/servicesForMee'>
+                    <Link className='h' to='/servicesForMee'>
                       <h4>Services ALL</h4>
                     </Link>
                   </Nav.Link>
                   <Nav.Link>
-                    <Link to={`/account/${user.id}`}>
+                    <Link className='h' to={`/account/${user.id}`}>
                       <h4>Account</h4>
                     </Link>
                   </Nav.Link>
@@ -118,7 +118,7 @@ function Navibar(): JSX.Element {
                     type='button'
                     onClick={logout}
                     className='mr-2'>
-                    <Link to='/'>
+                    <Link className='h' to='/'>
                       <h4>Logout</h4>
                     </Link>
                   </Button>
@@ -126,12 +126,12 @@ function Navibar(): JSX.Element {
               ) : (
                 <>
                   <Nav.Link>
-                    <Link className='' to='/login'>
-                      Sign in
+                    <Link className='h' to='/login'>
+                     <h4>Sign in</h4> 
                     </Link>
                   </Nav.Link>
                   <Nav.Link>
-                    <Link to='/registration'>
+                    <Link className='h' to='/registration'>
                       <h4>Sign up</h4>
                     </Link>
                   </Nav.Link>
