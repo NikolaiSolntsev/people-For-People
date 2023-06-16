@@ -17,6 +17,9 @@ function Footer(): JSX.Element {
           <h4>Governance</h4>
           <p>Token Lists</p>
         </div>
+        <div className='footer'>
+          <h5>&copy; Production by Cyber-DEDki, 2023</h5>
+        </div>
       </div>
     </div>
   );

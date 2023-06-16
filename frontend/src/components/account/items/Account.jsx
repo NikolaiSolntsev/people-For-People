@@ -63,19 +63,22 @@ function Account() {
   return (
     <div>
       <Profile />
-      <h1>это ваш аккаунт. ниже услуги, которые вы готовы предоставлять.</h1>
-      <div style={{display:'flex'}}>
-      {messages.map((message) => (
-        <AccountChatMessage
-          key={message.id}
-          chatMessage={message}
-          addChatMessage={addChatMessage}
-        />
-      ))}</div>
-      <div style={{display:'flex', width:'100%', flexWrap:'wrap'}}>
-      {services.map((service) => (<div>
-        <AccountService key={service.id} service={service} /></div>
-      ))}</div>
+      <div style={{ display: 'flex' }}>
+        {messages.map((message) => (
+          <AccountChatMessage
+            key={message.id}
+            chatMessage={message}
+            addChatMessage={addChatMessage}
+          />
+        ))}
+      </div>
+      <div style={{ display: 'flex', width: '100%', flexWrap: 'wrap' }}>
+        {services.map((service) => (
+          <div>
+            <AccountService key={service.id} service={service} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

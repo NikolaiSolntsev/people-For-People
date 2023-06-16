@@ -5235,18 +5235,20 @@ function AboutServiceForMee() {
   if (deal && deal.status === 'arhiv') {
     setDeal(undefined);
   }
+
+  // console.log(service);
   return (
     <div>
       {service && (
         <>
-          <h1>{`location: ${service.City.cityName}`}</h1>
+          <h1>{`from: ${service.City.cityName}`}</h1>
           <h2>{`service: ${service.Service.serviceName}`}</h2>
-          <h3>{`from user: ${service.User.name}`}</h3>
+          <h3>{`user: ${service.User.name}`}</h3>
           <h5>{`price: ${service.price}`}</h5>
           <h5>{`description: ${service.description}`}</h5>
           <div>
             {!deal && (
-              <button type="button" onClick={dealCreate}>
+              <button type='button' onClick={dealCreate}>
                 Заказать эту уcлугу
               </button>
             )}
@@ -5268,26 +5270,25 @@ function AboutServiceForMee() {
             <h1>ваш чат с владельцем обЪявления:</h1>
 
             <form
-              action=""
-              className="chat-form"
+              action=''
+              className='chat-form'
               onSubmit={(e) => {
                 e.preventDefault();
                 addChatMessage();
-              }}
-            >
-              <div class="chat-header">Chat</div>
-              <div class="chat-window">
-                <ul class="message-list"></ul>
+              }}>
+              <div class='chat-header'>Chat</div>
+              <div class='chat-window'>
+                <ul class='message-list'></ul>
                 <ChatMessageList chatMessages={messagesOk} />
               </div>
-              <div class="chat-input">
+              <div class='chat-input'>
                 <input
-                  type="text"
-                  class="message-input"
-                  placeholder="Type your message here"
+                  type='text'
+                  class='message-input'
+                  placeholder='Type your message here'
                   onChange={(e) => setText(e.target.value)}
                 />
-                <button className="send-button" type="submit">
+                <button className='send-button' type='submit'>
                   Add massage
                 </button>
               </div>
