@@ -68,20 +68,20 @@ function AddServiceForm(): JSX.Element {
   };
 
   return (
-    <div>
+    <div className='divAdd'>
       {user?.language === 'русский' ? (
         <div className="add-service-form">
           <form className="add-form" onSubmit={addForm}>
             <p className="form-title">Добавление услуги</p>
-            <div className="choice-service">
-              <select ref={nameServicesInput} required>
+            <div className="choice-service input-container">
+              <select ref={nameServicesInput} className="select-container" required>
                 {nameServices.map((myserv) => (
                   <option value={myserv.id}> {myserv.serviceName}</option>
                 ))}
               </select>
             </div>
-            <div className="choice-country">
-              <select
+            <div className="choice-country input-container">
+              <select className="select-container"
                 onChange={(e) => dispatch(citiesInit(Number(e.target.value)))}
                 ref={countryInput}
                 required
@@ -92,8 +92,8 @@ function AddServiceForm(): JSX.Element {
                 ))}
               </select>
             </div>
-            <div className="city-input">
-              <select ref={cityInput} required>
+            <div className="city-input input-container">
+              <select className="select-container" ref={cityInput} required>
                 <option value="none">Выберите город </option>
                 {cities.map((city) => (
                   <option value={city.id}>{city.cityName}</option>
@@ -103,14 +103,14 @@ function AddServiceForm(): JSX.Element {
             <div className="image-input">
               <input
                 type="file"
-                className="service-image-input"
+                // className="service-image-input"
                 placeholder="Загрузите фото"
                 ref={imageInput}
                 multiple
                 required
               />
             </div>
-            <div className="price-input">
+            <div className="price-input input-container">
               <input
                 required
                 id="outlined-required"
@@ -120,7 +120,7 @@ function AddServiceForm(): JSX.Element {
                 ref={priceInput}
               />
             </div>
-            <div className="description-input">
+            <div className="description-input input-container">
               <input
                 required
                 id="outlined-required"
