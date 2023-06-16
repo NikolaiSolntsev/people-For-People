@@ -5,6 +5,7 @@ import AccountService from './AccountService';
 import { socket } from '../../servicesFoMee/items/AboutServiceForMee';
 import AccountChatMessage from './AccountChatMessage';
 import Profile from '../item/Profile';
+import './Account.css';
 
 let messages = [];
 
@@ -61,21 +62,30 @@ function Account() {
   }
 
   return (
-    <div>
-      <Profile />
-      <h1>это ваш аккаунт. ниже услуги, которые вы готовы предоставлять.</h1>
-      <div style={{display:'flex'}}>
-      {messages.map((message) => (
-        <AccountChatMessage
-          key={message.id}
-          chatMessage={message}
-          addChatMessage={addChatMessage}
-        />
-      ))}</div>
-      <div style={{display:'flex', width:'100%', flexWrap:'wrap'}}>
-      {services.map((service) => (<div>
-        <AccountService key={service.id} service={service} /></div>
-      ))}</div>
+    <div className='wrapper'>
+      <div className='wrapperinwrapper'>
+        {' '}
+        <Profile />
+      </div >
+      <div >
+        {services.map((service) => (
+          <div>
+            <AccountService key={service.id} service={service} />
+          </div>
+        ))}
+      </div>
+      <div className='chat-account-container'>
+        <div className="chat-window">
+          {messages.map((message) => (
+            <AccountChatMessage
+              key={message.id}
+              chatMessage={message}
+              addChatMessage={addChatMessage}
+            />
+          ))}
+        </div>
+      </div>
+
     </div>
   );
 }
