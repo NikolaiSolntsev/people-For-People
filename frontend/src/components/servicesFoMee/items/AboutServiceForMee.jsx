@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { RootState } from '../../../store';
 import { MyService } from '../../myService/type/MyService';
 import ChatMessageList from './ChatMessageList';
+import './AboutServiceForMee.css';
 
 ///////////////////
 
@@ -5245,7 +5246,7 @@ function AboutServiceForMee() {
           <h5>{`description: ${service.description}`}</h5>
           <div>
             {!deal && (
-              <button type='button' onClick={dealCreate}>
+              <button type="button" onClick={dealCreate}>
                 Заказать эту уcлугу
               </button>
             )}
@@ -5267,15 +5268,30 @@ function AboutServiceForMee() {
             <h1>ваш чат с владельцем обЪявления:</h1>
 
             <form
-              action=''
+              action=""
+              className="chat-form"
               onSubmit={(e) => {
                 e.preventDefault();
                 addChatMessage();
-              }}>
-              <input type='text' onChange={(e) => setText(e.target.value)} />
-              <button type='submit'>add massage</button>
+              }}
+            >
+              <div class="chat-header">Chat</div>
+              <div class="chat-window">
+                <ul class="message-list"></ul>
+                <ChatMessageList chatMessages={messagesOk} />
+              </div>
+              <div class="chat-input">
+                <input
+                  type="text"
+                  class="message-input"
+                  placeholder="Type your message here"
+                  onChange={(e) => setText(e.target.value)}
+                />
+                <button className="send-button" type="submit">
+                  Add massage
+                </button>
+              </div>
             </form>
-            <ChatMessageList chatMessages={messagesOk} />
           </div>
         </>
       )}
