@@ -16,6 +16,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { useAppDispatch } from '../store';
 import History from '../components/history/item/History';
+import MainPage from '../components/mainPage/item/MainPage';
 // import Slider from '../components/slider/Slider';
 
 function App(): JSX.Element {
@@ -36,6 +37,7 @@ function App(): JSX.Element {
       {/* <Slider /> */}
 
       <Routes>
+        <Route path='/' element={<MainPage />} />
         <Route path='/history' element={<History />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/myServices' element={<MyServiceList />} />
@@ -48,9 +50,10 @@ function App(): JSX.Element {
         />
         <Route path='/account/:user_id' element={<Account />} />
       </Routes>
-      <div className='footer'><footer>&copy; Production by Cyber-DEDki, 2023</footer></div>
+      <div className='footer'>
+        <footer>&copy; Production by Cyber-DEDki, 2023</footer>
+      </div>
     </div>
-          
   );
 }
 
