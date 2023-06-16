@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { ChatMessage } from '../../servicesFoMee/types/ChatMessage';
 import { useSelector } from 'react-redux';
+import { ChatMessage } from '../../servicesFoMee/types/ChatMessage';
 import { RootState } from '../../../store';
+import './AccountChatMessage.css';
 
 function AccountChatMessage({
   chatMessage,
@@ -22,40 +23,42 @@ function AccountChatMessage({
   //  console.log(chatMessage)
 
   return (
-    <div>
-      {user &&
-      chatMessage &&
-      chatMessage.User.id &&
-      user.id === chatMessage.User.id ? (
-        <div>
-          <h3>ваше сообщение </h3>
-          <p>{`${chatMessage.text}`}</p>
+    <div className="form-container">
+      {' '}
+      <form
+        className="chat-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          addChatMessage(chatMessage.bayer_id, chatMessage.myService_id, text);
+          setButton(true);
+          //setText('');
+        }}
+      >
+        <div className="chat-window">
+          <ul className="message-list">
+            <div>
+              <div>
+                <p>Ваше сообщение: </p>
+                <p>{`${chatMessage.text}`}</p>
+              </div>
+              <h3>{`сообщение от ${chatMessage.User.name} :`}</h3>
+              <p>{`${chatMessage.text}`}</p>
+              <div className="chat-input">
+          
+                <input
+                  className="message-input"
+                  placeholder="Type your message here"
+                  type="text"
+                  onChange={(e) => setText(e.target.value)}
+                />
+                <button className="send-button" type="submit">
+                  Отправить
+                </button>
+              </div>
+            </div>
+          </ul>
         </div>
-      ) : (
-        <div>
-          <h3>{`сообщение от ${chatMessage.User.name} :`}</h3>
-          <p>{`${chatMessage.text}`}</p>
-
-          {button ? (
-            <button onClick={() => setButton(false)}>написать автору</button>
-          ) : (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                addChatMessage(
-                  chatMessage.bayer_id,
-                  chatMessage.myService_id,
-                  text
-                );
-                setButton(true);
-                //setText('');
-              }}>
-              <input type='text' onChange={(e) => setText(e.target.value)} />
-              <button type='submit'>отправить</button>
-            </form>
-          )}
-        </div>
-      )}
+      </form>
     </div>
   );
 }
