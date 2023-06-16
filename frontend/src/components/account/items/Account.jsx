@@ -62,29 +62,31 @@ function Account() {
   }
 
   return (
-
     <div className='wrapper'>
       <div className='wrapperinwrapper'>
         {' '}
         <Profile />
-      </div >
-      <div >
-        {services.map((service) => (
-          <div>
-            <AccountService key={service.id} service={service} />
-          </div>
-        ))}
       </div>
 
-      <div className='chat-account-container'>
-        <div className="chat-window">
-          {messages.map((message) => (
-            <AccountChatMessage
-              key={message.id}
-              chatMessage={message}
-              addChatMessage={addChatMessage}
-            />
+      <div className='profil-box'>
+        <div className='service-item'>
+          {services.map((service) => (
+            <div>
+              <AccountService key={service.id} service={service} />
+            </div>
           ))}
+        </div>
+
+        <div className='chat-account-container'>
+          <div className='chat-window'>
+            {messages.map((message) => (
+              <AccountChatMessage
+                key={message.id}
+                chatMessage={message}
+                addChatMessage={addChatMessage}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
