@@ -6,7 +6,6 @@ import './MainPage.css';
 function MainPage(): JSX.Element {
   return (
     <div className='mainPage'>
-      <h1>MainPage</h1>
       <Hero />
       <Footer />
     </div>

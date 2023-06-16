@@ -15,7 +15,7 @@
 
 .hero .hero-text {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   height: 90%;

@@ -3,6 +3,7 @@ import './Navibar.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Nav, Navbar, Button } from 'react-bootstrap';
+import Logo from './logo/logo.jpg';
 
 import { RootState, useAppDispatch } from '../../store';
 import { userLogout } from '../authentication/authSlice/authSlice';
@@ -15,11 +16,13 @@ function Navibar(): JSX.Element {
   };
 
   return (
-    <Navbar collapseOnSelect expand='lg' bg='light' variant='light'>
+    <Navbar collapseOnSelect expand='lg' variant='light'>
       {user?.language === 'русский' ? (
         <>
           <Navbar.Brand className='ml-7'>
-            <h2>People for</h2> People
+            <div className='box'>
+              <img src={Logo} alt='' />
+            </div>
           </Navbar.Brand>
           <Navbar.Text>
             <h4>{user && `Вы вошли как  ${user.name}`}</h4>
@@ -79,7 +82,9 @@ function Navibar(): JSX.Element {
         <>
           {' '}
           <Navbar.Brand className='ml-7'>
-            <h2>People for</h2> People
+            <div className='box'>
+              <img src={Logo} alt='' />
+            </div>
           </Navbar.Brand>
           <Navbar.Text>
             <h4>{user && `You are logged in as ${user.name}`}</h4>
