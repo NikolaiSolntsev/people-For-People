@@ -15,7 +15,6 @@ function Profile(): JSX.Element {
   const [form, setForm] = useState(false);
   const dispatch = useAppDispatch();
 
-
   useEffect(() => {
     if (user) {
       setName(user?.name);
@@ -24,7 +23,6 @@ function Profile(): JSX.Element {
       setLanguage(user.language);
     }
   }, [user]);
-
 
   const saveChange: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -45,45 +43,45 @@ function Profile(): JSX.Element {
       {user?.language === 'русский' ? (
         <>
           <h1>Ваш профиль</h1>
-                    <div className="profile">
-            <div className="icon"><div>
-              <div className="avatar ava">
-                <img src={user?.photo} alt="img" />
+          <div className="profile">
+            <div className="icon">
+              <div>
+                <div className='score'>
+                  <h5>{user?.score}</h5>
+                </div>
+                <div className="avatar ava">
+                  <img src={user?.photo} alt="img" />
+                </div>
+                {!form && (
+                  <button
+                    className="save-btn saveBTN"
+                    type="button"
+                    onClick={() => setForm(true)}
+                  >
+                    изменить профиль
+                  </button>
+                )}
               </div>
-              {!form && (
-              <button
-                className="save-btn saveBTN"
-                type="button"
-                onClick={() => setForm(true)}
-              >
-                изменить профиль
-              </button>
-            )}
-            </div>
               <div className="infoGroup">
-                <div>
-                  <h3>твои баллы: {user?.score}</h3>
-                </div>
-                <div>
-                  <h3>твой телефон: {user?.phone}</h3>
-                </div>
                 <div className="buttonGroup">
-                <div>
-                  <button className="btn" type="button">
-                    <Link to="/myServices"><h3>добавить услугу</h3></Link>
-                  </button>
-                </div>
-                <div>
-                  <button className=" btn" type="button">
-                    <Link to="/history"><h3>история заказов</h3></Link>
-                  </button>
+                  <div>
+                    <button className="btn" type="button">
+                      <Link to="/myServices">
+                        <h3>добавить услугу</h3>
+                      </Link>
+                    </button>
+                  </div>
+                  <div>
+                    <button className=" btn" type="button">
+                      <Link to="/history">
+                        <h3>история заказов</h3>
+                      </Link>
+                    </button>
+                  </div>
                 </div>
               </div>
-              </div>
-
-              
             </div>
-           
+
             {form && (
               <>
                 {' '}
@@ -110,7 +108,6 @@ function Profile(): JSX.Element {
                       value={email}
                     />
                   </div>
-
                   <div className="input-container">
                     <select
                       className="select-container"
@@ -126,7 +123,12 @@ function Profile(): JSX.Element {
                   </div>
                   <button type="submit" className="save-btn">
                     сохранить
-                  </button> <button onClick={()=>setForm(false)} type="button" className="save-btn">
+                  </button>{' '}
+                  <button
+                    onClick={() => setForm(false)}
+                    type="button"
+                    className="save-btn"
+                  >
                     закрыть
                   </button>
                 </form>
@@ -137,45 +139,45 @@ function Profile(): JSX.Element {
       ) : (
         <>
           <h1>Your Profile</h1>
-                    <div className="profile">
-            <div className="icon"><div>
-              <div className="avatar ava">
-                <img src={user?.photo} alt="img" />
+          <div className="profile">
+            <div className="icon">
+              <div>
+              <div className='score'>
+                  <h5>{user?.score}</h5>
+                </div>
+                <div className="avatar ava">
+                  <img src={user?.photo} alt="img" />
+                </div>
+                {!form && (
+                  <button
+                    className="save-btn saveBTN"
+                    type="button"
+                    onClick={() => setForm(true)}
+                  >
+                    change profile
+                  </button>
+                )}
               </div>
-              {!form && (
-              <button
-                className="save-btn saveBTN"
-                type="button"
-                onClick={() => setForm(true)}
-              >
-               change profile
-              </button>
-            )}
-            </div>
               <div className="infoGroup">
-                <div>
-                  <h3>your points: {user?.score}</h3>
-                </div>
-                <div>
-                  <h3> your phone number: {user?.phone}</h3>
-                </div>
                 <div className="buttonGroup">
-                <div>
-                  <button className="btn" type="button">
-                    <Link to="/myServices"><h3>add a service</h3></Link>
-                  </button>
-                </div>
-                <div>
-                  <button className=" btn" type="button">
-                    <Link to="/history"><h3>history of orders</h3></Link>
-                  </button>
+                  <div>
+                    <button className="btn" type="button">
+                      <Link to="/myServices">
+                        <h3>add a service</h3>
+                      </Link>
+                    </button>
+                  </div>
+                  <div>
+                    <button className=" btn" type="button">
+                      <Link to="/history">
+                        <h3>history of orders</h3>
+                      </Link>
+                    </button>
+                  </div>
                 </div>
               </div>
-              </div>
-
-              
             </div>
-           
+
             {form && (
               <>
                 {' '}
@@ -202,7 +204,6 @@ function Profile(): JSX.Element {
                       value={email}
                     />
                   </div>
-
                   <div className="input-container">
                     <select
                       className="select-container"
@@ -218,7 +219,12 @@ function Profile(): JSX.Element {
                   </div>
                   <button type="submit" className="save-btn">
                     save
-                  </button> <button onClick={()=>setForm(false)} type="button" className="save-btn">
+                  </button>{' '}
+                  <button
+                    onClick={() => setForm(false)}
+                    type="button"
+                    className="save-btn"
+                  >
                     close
                   </button>
                 </form>
