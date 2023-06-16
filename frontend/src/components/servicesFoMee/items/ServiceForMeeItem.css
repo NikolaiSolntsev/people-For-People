@@ -1,18 +1,19 @@
-.serviceItem-card-all {
+/* .serviceItem-card-all {
   width: 300px;
-  height: 550px;
-  background: #eeecec;
+  height: 300px;
+  background: #fff;
   position: relative;
   padding: 1.8rem;
   transition: 0.5s ease-out;
   overflow: visible;
+  border:  2px solid red;
   margin-top: 40px;
-}
+} */
 
-.img-service-all {
+/* .img-service-all {
   max-width: 250px;
   max-height: 350px;
-}
+} */
 .about-btn {
   transform: translate(-50%, 125%);
   width: 60%;
@@ -27,25 +28,33 @@
   opacity: 0;
   transition: 0.3s ease-out;
 }
-.serviceItem-card-details-all {
+/* .serviceItem-card-details-all {
   color: black;
-  height: 100%;
-  width: 100%;
+  -webkit-text-stroke: 1.2px rgb(252, 249, 249);
+  height: 300px;
+  width: 300px;
   gap: 0.5em;
   display: grid;
   place-content: center;
-}
+} */
 .serviceItem-card-all:hover .about-btn {
   transform: translate(-50%, 50%);
   opacity: 1;
 }
-.img-container {
+/* .img-container {
   width: 100%;
-  height: 200px;
+  height: 100%;
   overflow: hidden;
+  
 }
-.img-container img {
+.tex{
+  width: 100%;
+  position: absolute;
+  top: 200px;
+  left: 0;
+}
+.img-service-all {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
+} */

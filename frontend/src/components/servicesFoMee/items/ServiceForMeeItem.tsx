@@ -7,32 +7,26 @@ import './ServiceForMeeItem.css';
 function ServiceForMeeItem({ service }: { service: MyService }): JSX.Element {
   const navigate = useNavigate();
   return (
-    <div className="serviceItem-card-all">
-      <div className="serviceItem-card-details-all">
-        <div className="img-container">
+    <div className="serviceItem-card-all" style={{width:'300px', height:'300px', background:'#fff',position:'relative', border:'none' }}>
+          <div className="img-container" style={{width:'300px', height:'300px', overflow:'hidden', color:'black', WebkitTextStroke:'0.8px #fff'}}>
           <img
             className="img-service-all"
             src={service.image}
             alt={service.description}
+            style={{width:'100%', height:'100%', objectFit: 'cover' }}
           />
+          <h4 className="tex" style={{width:'100%', position:'absolute', top:'220px', marginLeft:'-70px'}}>
+            {service.User.name} <br /> from <br /> {service.City.cityName}
+          </h4>
         </div>
-        <div className='service-all-info'><h5>location: </h5>
-        <h4>{service.City.cityName}</h4>
-        <h5>
-          service:<h3>{service.Service.serviceName} </h3>
-        </h5>
-        <h5>
-          from user: <h3>{service.User.name}</h3>
-        </h5>
-        <h5>price:</h5> <h4>{service.price}</h4></div>
         
-      </div>
+      
       <button
         className="about-btn"
         onClick={() => getAbout({ service, navigate })}
         type="button"
       >
-       About
+        About
       </button>
     </div>
   );
