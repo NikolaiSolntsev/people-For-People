@@ -7,7 +7,7 @@ module.exports = {
       'Services',
       [
         {
-          serviceName: 'Tamada',
+          serviceName: 'Taxi',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
