@@ -62,6 +62,7 @@ function Account() {
   }
 
   return (
+
     <div className='wrapper'>
       <div className='wrapperinwrapper'>
         {' '}
@@ -74,6 +75,7 @@ function Account() {
           </div>
         ))}
       </div>
+
       <div className='chat-account-container'>
         <div className="chat-window">
           {messages.map((message) => (
@@ -85,7 +87,6 @@ function Account() {
           ))}
         </div>
       </div>
-
     </div>
   );
 }

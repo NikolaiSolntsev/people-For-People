@@ -1,5 +1,12 @@
 const router = require('express').Router();
-const { MyService, User, City, Service, MessChat } = require('../../db/models');
+const {
+  MyService,
+  User,
+  City,
+  Service,
+  MessChat,
+  PhotoMyService,
+} = require('../../db/models');
 
 router.route('/').get(async (req, res) => {
   try {
@@ -10,6 +17,7 @@ router.route('/').get(async (req, res) => {
 
         { model: Service },
         { model: MessChat },
+        // { model: PhotoMyService },
       ],
     });
     res.json({ myServices });
@@ -17,7 +25,6 @@ router.route('/').get(async (req, res) => {
     res.json({ message: err.message });
   }
 });
-
 
 router.post('/', async (req, res) => {
   try {
