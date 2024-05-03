@@ -5235,17 +5235,18 @@ function AboutServiceForMee() {
   if (deal && deal.status === 'arhiv') {
     setDeal(undefined);
   }
-
+ 
   // console.log(service);
   return (
     <div>
+         {user?.language === 'русский' ? (<>
       {service && (
         <>
-          <h1>{`from: ${service.City.cityName}`}</h1>
-          <h2>{`service: ${service.Service.serviceName}`}</h2>
-          <h3>{`user: ${service.User.name}`}</h3>
-          <h5>{`price: ${service.price}`}</h5>
-          <h5>{`description: ${service.description}`}</h5>
+          <h1>{`услуга: ${service.Service.serviceName}`}</h1>
+          <h2>{`из: ${service.City.cityName}`}</h2>
+          <h3>{`от: ${service.User.name}`}</h3>
+          <h5>{`цена: ${service.price}`}</h5>
+          <h5>{`описание: ${service.description}`}</h5>
           <div>
             {!deal && (
               <button type='button' onClick={dealCreate}>
@@ -5264,10 +5265,66 @@ function AboutServiceForMee() {
                 )}
 
                 <h4>Подробности по сделке в личном кабинете</h4>
+                {user && <Link to={`/account/${user.id}`}>Аккаунт</Link>}
+              </>
+            )}
+           
+
+            <form
+              action=''
+              className='chat-form'
+              onSubmit={(e) => {
+                e.preventDefault();
+                addChatMessage();
+              }}>
+              <div class='chat-header'>Чат</div>
+              <div class='chat-window'>
+                <ul class='message-list'></ul>
+                <ChatMessageList chatMessages={messagesOk} />
+              </div>
+              <div class='chat-input'>
+                <input
+                  type='text'
+                  class='message-input'
+                  placeholder='Type your message here'
+                  onChange={(e) => setText(e.target.value)}
+                />
+                <button className='send-button' type='submit'>
+                  Добавить сообщение
+                </button>
+              </div>
+            </form>
+          </div>
+        </>
+      )}</>):(  <>{service && (
+        <>
+          <h1>{`from: ${service.City.cityName}`}</h1>
+          <h2>{`service: ${service.Service.serviceName}`}</h2>
+          <h3>{`user: ${service.User.name}`}</h3>
+          <h5>{`price: ${service.price}`}</h5>
+          <h5>{`description: ${service.description}`}</h5>
+          <div>
+            {!deal && (
+              <button type='button' onClick={dealCreate}>
+                Order this service
+              </button>
+            )}
+            {deal && (
+              <>
+                {deal.status === 'create' && (
+                  <h4>
+                    Your deal has been created, waiting for confirmation from the seller
+                  </h4>
+                )}
+                {deal.status === 'right' && (
+                  <h4> Your transaction has been confirmed by the seller</h4>
+                )}
+
+                <h4>Details of the transaction in your personal account</h4>
                 {user && <Link to={`/account/${user.id}`}>Account</Link>}
               </>
             )}
-            <h1>ваш чат с владельцем обЪявления:</h1>
+           
 
             <form
               action=''
@@ -5295,7 +5352,7 @@ function AboutServiceForMee() {
             </form>
           </div>
         </>
-      )}
+      )}</>)}
     </div>
   );
 }

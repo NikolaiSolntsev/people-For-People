@@ -14,13 +14,20 @@ function ChatMessageItem({
 
   return (
     <div style={{ borderStyle: 'solid', borderColor: 'green' }}>
+       {user?.language === 'русский' ? (<>
       <p>{`${chatMessage.createdAt}`}</p>
       {user && user.id !== chatMessage.User.id ? (
         <p>{`Сообщение от : ${chatMessage.User.name}`}</p>
       ) : (
         <p style={{ color: 'red' }}>Сообщение от вас :</p>
       )}
-      <p>{`${chatMessage.text}`}</p>
+      <p>{`${chatMessage.text}`}</p></>):(<><p>{`${chatMessage.createdAt}`}</p>
+      {user && user.id !== chatMessage.User.id ? (
+        <p>{`Сообщение от : ${chatMessage.User.name}`}</p>
+      ) : (
+        <p style={{ color: 'red' }}>message from you :</p>
+      )}
+      <p>{`${chatMessage.text}`}</p></>)}
     </div>
   );
 }
