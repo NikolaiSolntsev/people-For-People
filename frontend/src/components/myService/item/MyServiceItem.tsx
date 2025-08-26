@@ -21,7 +21,7 @@ function MyServiceItem({ myService }: { myService: MyService }): JSX.Element {
               <img
                 className="img-service"
                 src={myService.image}
-                alt="Picture none"
+                alt="none"
               />
             </div>
             <h6>
