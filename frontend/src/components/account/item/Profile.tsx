@@ -42,7 +42,7 @@ function Profile(): JSX.Element {
     <div>
       {user?.language === 'русский' ? (
         <>
-          <h1>Ваш профиль</h1>
+          <h1>Ваш Профиль</h1>
           <div className="profile">
             <div className="icon">
               <div>
